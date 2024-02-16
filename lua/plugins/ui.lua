@@ -22,4 +22,16 @@ return {
       },
     },
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      local custom_auto = require("lualine.themes.auto")
+      custom_auto.normal.c.bg = "None"
+      opts.options = {
+        theme = custom_auto,
+        section_separators = { left = "", right = "" },
+        component_separators = "▎",
+      }
+    end,
+  },
 }
