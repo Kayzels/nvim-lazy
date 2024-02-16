@@ -32,6 +32,10 @@ return {
         theme = custom_auto,
         section_separators = { left = "", right = "" },
         component_separators = "▎",
+        disabled_filetypes = {
+          tabline = { "neo-tree", "dashboard" },
+          winbar = { "neo-tree", "dashboard" },
+        },
       }
       opts.winbar = {
         lualine_a = {},
@@ -40,8 +44,8 @@ return {
         lualine_x = {},
         lualine_y = {},
         lualine_z = {
-          { "filetype", icon_only = true, separator = "" },
-          { "filename", file_status = true },
+          { "filetype", icon_only = true, colored = false, separator = "" },
+          { "filename", file_status = true, padding = { left = 0, right = 2 } },
         },
       }
       opts.inactive_winbar = {
@@ -49,7 +53,7 @@ return {
         lualine_b = {},
         lualine_c = {
           { "filename", file_status = true, separator = "" },
-          { "filetype", icon_only = true },
+          { "filetype", icon_only = true, colored = false },
         },
         lualine_x = {},
         lualine_y = {},
