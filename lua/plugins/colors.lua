@@ -30,6 +30,10 @@ return {
         hl.NeoTreeTitleBar = {
           fg = c.border_highlight,
         }
+        hl.CmpGhostText = {
+          fg = c.comment,
+          italic = true,
+        }
       end
     end,
   },
