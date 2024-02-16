@@ -8,19 +8,30 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    opts = {
-      transparent = true,
-      styles = {
+    opts = function(_, opts)
+      opts.transparent = true
+      opts.styles = {
         comments = { italic = true },
         keywords = { italic = false },
         functions = { bold = true },
         variables = {},
         sidebars = "transparent",
         floats = "transparent",
-      },
-      dim_inactive = true,
-      lualine_bold = true,
-    },
+      }
+      opts.dim_inactive = true
+      opts.lualine_bold = true
+      opts.on_highlights = function(hl, c)
+        hl.VertSplit = {
+          fg = c.border_highlight,
+        }
+        hl.WinSeparator = {
+          fg = c.border_highlight,
+        }
+        hl.NeoTreeTitleBar = {
+          fg = c.border_highlight,
+        }
+      end
+    end,
   },
   {
     "LazyVim/LazyVim",
