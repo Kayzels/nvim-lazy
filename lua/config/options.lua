@@ -4,6 +4,6 @@
 
 vim.opt.pumblend = 0 -- Make popups transparent
 vim.opt.foldtext = ""
-vim.g.autoformat = false
+-- vim.g.autoformat = false
 vim.opt.listchars:append({ tab = " "})
 
