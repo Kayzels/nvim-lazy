@@ -11,10 +11,4 @@ return {
       table.insert(opts.sources, { name = "vimtex" })
     end,
   },
-  {
-    -- Allow tabbing out of pair
-    "abecodes/tabout.nvim",
-    dependencies = { "nvim-treesitter", "nvim-cmp" },
-    opts = {},
-  },
 }
