@@ -34,6 +34,12 @@ return {
           fg = c.comment,
           italic = true,
         }
+        hl.ColorColumn = {
+          bg = c.bg_highlight,
+        }
+        hl.Folded = {
+          bg = c.bg_statusline,
+        }
       end
     end,
   },
