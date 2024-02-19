@@ -1,0 +1,35 @@
+{
+  "name": "kyzan-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global",
+          "all"
+        ],
+        "path": "./all.json"
+      },
+      {
+        "language": [
+          "tex",
+          "plaintex"
+        ],
+        "path": "./tex/envs.jsonc"
+      },
+      {
+        "language": [
+          "tex",
+          "plaintex"
+        ],
+        "path": "./tex/commands.json"
+      }
+    ]
+  }
+}

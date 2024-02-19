@@ -1,0 +1,7 @@
+{
+  "test": {
+    "prefix": "ltest",
+    "body": "LuaSnippets VSCode working!",
+    "description": "Test whether the vscode snippets for LuaSnippets are working"
+  }
+}

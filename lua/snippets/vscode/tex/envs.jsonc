@@ -1,0 +1,200 @@
+{
+  // Custom environments
+  "answer": {
+    "prefix": [
+      "ans",
+      "answer",
+      "BANS"
+    ],
+    "body": [
+      "\\begin{answer}",
+      "\t$0",
+      "\\end{answer}"
+    ],
+    "description": "Insert an answer environment"
+  },
+  "definition": {
+    "prefix": [
+      "def",
+      "definition",
+      "BDEF"
+    ],
+    "body": [
+      "\\begin{definition}{${1:title}}",
+      "\t$0",
+      "\\end{definition}"
+    ],
+    "description": "Insert a definition environment"
+  },
+  "descriptenum": {
+    "prefix": [
+      "denum",
+      "descriptenum",
+      "BDNM"
+    ],
+    "body": [
+      "\\begin{descriptenum}",
+      "\t\\item[$1] $0",
+      "\\end{descriptenum}"
+    ],
+    "description": "Insert a descriptenum environment"
+  },
+  "descriptimize": {
+    "prefix": [
+      "denum",
+      "descriptimize",
+      "BDNM"
+    ],
+    "body": [
+      "\\begin{descriptimize}",
+      "\t\\item[$1] $0",
+      "\\end{descriptimize}"
+    ],
+    "description": "Insert a descriptimize environment"
+  },
+  "example": {
+    "prefix": [
+      "exa",
+      "example",
+      "BEXA"
+    ],
+    "body": [
+      "\\begin{example}",
+      "\t$0",
+      "\\end{example}"
+    ],
+    "description": "Insert an example environment"
+  },
+  "example[]": {
+    "prefix": [
+      "exa[]",
+      "example[]",
+      "BEXA[]"
+    ],
+    "body": [
+      "\\begin{example}[${1:title}]",
+      "\t$0",
+      "\\end{example}"
+    ],
+    "description": "Insert a titled example environment"
+  },
+  "example[][]": {
+    "prefix": [
+      "exa[][]",
+      "example[][]",
+      "BEXA[][]"
+    ],
+    "body": [
+      "\\begin{example}[${1:title}][${2:options}]",
+      "\t$0",
+      "\\end{example}"
+    ],
+    "description": "Insert a titled example environment with options"
+  },
+  "exercise": {
+    "prefix": [
+      "exc",
+      "exercise",
+      "BEXC"
+    ],
+    "body": [
+      "\\begin{exercise}{${1:title}}",
+      "\t$0",
+      "\\end{exercise}"
+    ],
+    "description": "Insert an exercise environment"
+  },
+  "indentparagraph": {
+    "prefix": [
+      "inp",
+      "indentparagraph",
+      "BINP"
+    ],
+    "body": [
+      "\\begin{indentparagraph}",
+      "\t$0",
+      "\\end{indentparagraph}"
+    ],
+    "description": "Insert an indentparagraph environment"
+  },
+  "question": {
+    "prefix": [
+      "que",
+      "question",
+      "BQUE"
+    ],
+    "body": [
+      "\\begin{question}",
+      "\t$0",
+      "\\end{question}"
+    ],
+    "description": "Insert a question environment"
+  },
+  "sidenote": {
+    "prefix": [
+      "sdn",
+      "sidenote",
+      "BSDN"
+    ],
+    "body": [
+      "\\begin{sidenote}{${1:title}}",
+      "\t$0",
+      "\\end{sidenote}"
+    ],
+    "description": "Insert a sidenote environment"
+  },
+  "theorem": {
+    "prefix": [
+      "thm",
+      "theorem",
+      "BTHM"
+    ],
+    "body": [
+      "\\begin{theorem}{${1:title}}",
+      "\t$0",
+      "\\end{theorem}"
+    ],
+    "description": "Insert a theorem environment"
+  },
+  // Builtin environments
+  "env": {
+    "prefix": [
+      "begin",
+      "\\begin",
+      "env",
+      "BENV"
+    ],
+    "body": [
+      "\\begin{${1:env}}",
+      "\t$0",
+      "\\end{${1:env}}"
+    ],
+    "description": "Insert a new environment"
+  },
+  "itemize": {
+    "prefix": [
+      "itemize",
+      "BIT",
+      "- "
+    ],
+    "body": [
+      "\\begin{itemize}",
+      "\t\\item $0",
+      "\\end{itemize}"
+    ],
+    "description": "Insert a new itemize environment"
+  },
+  "enumerate": {
+    "prefix": [
+      "enumerate",
+      "BEN",
+      "1. "
+    ],
+    "body": [
+      "\\begin{enumerate}",
+      "\t\\item $0",
+      "\\end{enumerate}"
+    ],
+    "description": "Insert a new enumerate environment"
+  }
+}

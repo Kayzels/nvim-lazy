@@ -1,0 +1,35 @@
+{
+  "section": {
+    "prefix": [
+      "sec",
+      "section",
+      "\\section"
+    ],
+    "body": [
+      "\\section{$1}"
+    ],
+    "description": "Insert a new section"
+  },
+  "subsection": {
+    "prefix": [
+      "ssec",
+      "subsection",
+      "\\subsection"
+    ],
+    "body": [
+      "\\subsection{$1}"
+    ],
+    "description": "Insert a new subsection"
+  },
+  "subsubsection": {
+    "prefix": [
+      "sss",
+      "subsubsection",
+      "\\subsubsection"
+    ],
+    "body": [
+      "\\subsubsection{$1}"
+    ],
+    "description": "Insert a new subsubsection"
+  }
+}
