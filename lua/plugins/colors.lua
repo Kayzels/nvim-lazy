@@ -21,6 +21,8 @@ return {
       opts.dim_inactive = true
       opts.lualine_bold = true
       opts.on_highlights = function(hl, c)
+        local neotree_dim = "#4f5882"
+        local neotree_dark = "#444c70"
         hl.VertSplit = {
           fg = c.border_highlight,
         }
@@ -35,6 +37,20 @@ return {
         }
         hl.Folded = {
           bg = c.bg_statusline,
+        }
+        hl.NeoTreeGitModified = {
+          fg = c.cyan,
+          bold = true,
+        }
+        hl.NeoTreeDimText = {
+          fg = neotree_dim,
+        }
+        hl.NeoTreeFileStats = {
+          fg = neotree_dim,
+        }
+        hl.NeoTreeMessage = {
+          fg = neotree_dark,
+          italic = true,
         }
       end
     end,
