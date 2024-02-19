@@ -3,8 +3,7 @@
   "answer": {
     "prefix": [
       "ans",
-      "answer",
-      "BANS"
+      "answer"
     ],
     "body": [
       "\\begin{answer}",
@@ -16,8 +15,7 @@
   "definition": {
     "prefix": [
       "def",
-      "definition",
-      "BDEF"
+      "definition"
     ],
     "body": [
       "\\begin{definition}{${1:title}}",
@@ -29,8 +27,7 @@
   "descriptenum": {
     "prefix": [
       "denum",
-      "descriptenum",
-      "BDNM"
+      "descriptenum"
     ],
     "body": [
       "\\begin{descriptenum}",
@@ -42,8 +39,7 @@
   "descriptimize": {
     "prefix": [
       "denum",
-      "descriptimize",
-      "BDNM"
+      "descriptimize"
     ],
     "body": [
       "\\begin{descriptimize}",
@@ -55,8 +51,7 @@
   "example": {
     "prefix": [
       "exa",
-      "example",
-      "BEXA"
+      "example"
     ],
     "body": [
       "\\begin{example}",
@@ -68,8 +63,7 @@
   "example[]": {
     "prefix": [
       "exa[]",
-      "example[]",
-      "BEXA[]"
+      "example[]"
     ],
     "body": [
       "\\begin{example}[${1:title}]",
@@ -81,8 +75,7 @@
   "example[][]": {
     "prefix": [
       "exa[][]",
-      "example[][]",
-      "BEXA[][]"
+      "example[][]"
     ],
     "body": [
       "\\begin{example}[${1:title}][${2:options}]",
@@ -94,8 +87,7 @@
   "exercise": {
     "prefix": [
       "exc",
-      "exercise",
-      "BEXC"
+      "exercise"
     ],
     "body": [
       "\\begin{exercise}{${1:title}}",
@@ -107,8 +99,7 @@
   "indentparagraph": {
     "prefix": [
       "inp",
-      "indentparagraph",
-      "BINP"
+      "indentparagraph"
     ],
     "body": [
       "\\begin{indentparagraph}",
@@ -120,8 +111,7 @@
   "question": {
     "prefix": [
       "que",
-      "question",
-      "BQUE"
+      "question"
     ],
     "body": [
       "\\begin{question}",
@@ -133,8 +123,7 @@
   "sidenote": {
     "prefix": [
       "sdn",
-      "sidenote",
-      "BSDN"
+      "sidenote"
     ],
     "body": [
       "\\begin{sidenote}{${1:title}}",
@@ -146,8 +135,7 @@
   "theorem": {
     "prefix": [
       "thm",
-      "theorem",
-      "BTHM"
+      "theorem"
     ],
     "body": [
       "\\begin{theorem}{${1:title}}",
@@ -161,8 +149,7 @@
     "prefix": [
       "begin",
       "\\begin",
-      "env",
-      "BENV"
+      "env"
     ],
     "body": [
       "\\begin{${1:env}}",
@@ -171,10 +158,21 @@
     ],
     "description": "Insert a new environment"
   },
+  "description": {
+    "prefix": [
+      "desc",
+      "description"
+    ],
+    "body": [
+      "\\begin{description}",
+      "\t\\item[$1] $0",
+      "\\end{description}"
+    ],
+    "description": "Insert a description environment"
+  },
   "itemize": {
     "prefix": [
       "itemize",
-      "BIT",
       "- "
     ],
     "body": [
@@ -187,7 +185,6 @@
   "enumerate": {
     "prefix": [
       "enumerate",
-      "BEN",
       "1. "
     ],
     "body": [
