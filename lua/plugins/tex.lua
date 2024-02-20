@@ -18,6 +18,14 @@ return {
         "Overfull",
         "Underfull",
       }
+      vim.g.vimtex_syntax_custom_cmds = {
+        {
+          name = "concept",
+          conceal = true,
+          opt = false,
+          argstyle = "bold",
+        },
+      }
     end,
   },
 }

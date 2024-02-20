@@ -52,6 +52,10 @@ return {
           fg = neotree_dark,
           italic = true,
         }
+        hl.texCConceptArg = {
+          bold = true,
+          fg = c.teal,
+        }
       end
     end,
   },
