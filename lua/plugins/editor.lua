@@ -31,4 +31,8 @@ return {
       { "<leader>\\", desc = "Arrow" },
     },
   },
+  {
+    "RRethy/vim-illuminate",
+    enabled = false,
+  },
 }
