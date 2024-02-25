@@ -109,7 +109,7 @@ local snippets = {
   ),
   s(
     {
-      trig = "BEN",
+      trig = "BNUM",
       snippetType = "autosnippet",
     },
     fmta(
@@ -270,6 +270,41 @@ local snippets = {
       {
         i(1, "title"),
         i(2),
+      }
+    )
+  ),
+  s(
+    {
+      trig = "CNC",
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+        \concept{<>}
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = "NCHAP",
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+        \providecommand{\main}{..}
+        \documentclass[../notes.tex]{subfiles}
+
+        \begin{document}
+          \setcounter{chapter}{<>}
+          \chapter{<>}
+        \end{document}
+      ]],
+      {
+        i(1, "number - 1"),
+        i(2, "title"),
       }
     )
   ),
