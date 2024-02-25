@@ -5,5 +5,10 @@
 vim.opt.pumblend = 0 -- Make popups transparent
 vim.opt.foldtext = ""
 -- vim.g.autoformat = false
-vim.opt.listchars:append({ tab = " "})
+vim.opt.listchars:append({ tab = " " })
+vim.opt.scrolloff = 10
 
+-- Appearance for diagnostic popups
+vim.diagnostic.config({
+  float = { border = "rounded" },
+})
