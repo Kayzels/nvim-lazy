@@ -39,7 +39,7 @@ a_objects["C"] = { "<Plug>(vimtex-ac)", "Command" }
 i_objects["C"] = { "<Plug>(vimtex-ic)", "Command" }
 
 -- The mappings found after <localleader>l
-local vimtex_mappings = {
+local vimtex_local_mappings = {
   ["a"] = { "Context Menu" },
   ["C"] = { "Clean aux and output files" },
   ["c"] = { "Clean aux files" },
@@ -65,6 +65,12 @@ local vimtex_nv_mappings = {
   ["L"] = { "Compile selection" },
 }
 
+local vimtex_f_mappings = {
+  ["<F6>"] = { "VimTeX Surround", mode = { "n", "x" } },
+  ["<F7>"] = { "VimTeX Create Command", mode = { "n", "x", "i" } },
+  ["<F8>"] = { "VimTeX Add Modifiers", mode = { "n" } },
+}
+
 local wk = require("which-key")
 wk.register(tex_motions)
 wk.register({
@@ -74,9 +80,10 @@ wk.register({
 })
 wk.register({
   mode = { "n" },
-  ["<localleader>l"] = vimtex_mappings,
+  ["<localleader>l"] = vimtex_local_mappings,
 })
 wk.register({
-  mode = { "n", "v" },
+  mode = { "n", "x" },
   ["<localleader>l"] = vimtex_nv_mappings,
 })
+wk.register(vimtex_f_mappings)

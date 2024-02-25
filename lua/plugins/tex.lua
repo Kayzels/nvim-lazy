@@ -36,6 +36,14 @@ return {
           argstyle = "bold",
         },
       }
+      vim.g.vimtex_indent_lists = {
+        "itemize",
+        "description",
+        "enumerate",
+        "thebibliography",
+        "descriptimize",
+        "descriptenum",
+      }
     end,
   },
 }
