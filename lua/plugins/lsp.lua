@@ -17,6 +17,7 @@ return {
           },
         },
         ltex = {
+          autostart = false,
           filetypes = {
             "gitcommit",
             "latex",
