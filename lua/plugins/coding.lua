@@ -37,6 +37,22 @@ return {
         documentation = cmp.config.window.bordered(),
       }
       table.insert(opts.sources, { name = "vimtex" })
+      opts.formatting = {
+        format = function(entry, item)
+          local icons = require("lazyvim.config").icons.kinds
+          if icons[item.kind] then
+            item.kind = icons[item.kind] .. item.kind
+          end
+          item.menu = ({
+            vimtex = item.menu,
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[Snippet]",
+            path = "[Path]",
+          })[entry.source.name]
+          return item
+        end,
+      }
     end,
   },
   {
