@@ -28,3 +28,8 @@ if not vim.g.vscode then
     end,
   })
 end
+
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+  pattern = "*",
+  command = "set guicursor=a:ver25-blinkwait700-blinkoff400-blinkon250",
+})
