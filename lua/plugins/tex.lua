@@ -1,9 +1,16 @@
-local function GetOutputDir()
-  local file_name = vim.fn.expand("%:t")
-  if file_name == "notes.tex" then
+---@alias FileInfo {jobname: string, root: string, target: string, target_basename: string, target_name: string }
+
+---Create tex output directory
+---@param file_info FileInfo
+---@return string
+local function GetOutputDir(file_info)
+  if file_info.jobname == "notes" then
     return "./out/"
   else
-    return "../out/chapters/"
+    local subdir_root = file_info.root
+    ---@diagnostic disable-next-line: cast-local-type
+    subdir_root = vim.fn.fnamemodify(subdir_root, ":t")
+    return "../out/" .. subdir_root
   end
 end
 
