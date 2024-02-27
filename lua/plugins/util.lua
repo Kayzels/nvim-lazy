@@ -17,6 +17,7 @@ return {
         end,
         keys = {
           { "<leader>fp", "<Cmd>Telescope persisted<cr>", desc = "Sessions" },
+          { "<leader>qr", "<Cmd>SessionSave<cr>", desc = "Save Session" },
           { "<leader>qs", "<Cmd>SessionLoad<cr>", desc = "Load session for cwd" },
           { "<leader>ql", "<Cmd>SessionLoadLast<cr>", desc = "Load last session" },
           { "<leader>qx", "<Cmd>SessionStop<cr>", desc = "Stop recording a session" },
