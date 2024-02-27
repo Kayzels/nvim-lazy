@@ -27,8 +27,15 @@ return {
       end,
     },
     keys = {
-      { "<Tab>", mode = { "i", "s" }, false },
-      { "<S-Tab>", mode = { "i", "s" }, false },
+      {
+        "<Tab>",
+        function()
+          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<Plug>(neotab-out)"
+        end,
+        expr = true,
+        silent = true,
+        mode = "i",
+      },
     },
   },
   {
@@ -39,7 +46,6 @@ return {
     },
     opts = function(_, opts)
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
       opts.window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
@@ -55,24 +61,6 @@ return {
       opts.mapping["<S-CR>"] = cmp.mapping.confirm({ select = true })
       opts.mapping["<C-CR>"] = cmp.mapping.confirm({ select = true })
       opts.mapping["<S-Space>"] = cmp.mapping.abort()
-      opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end, { "i", "s" })
-      opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { "i", "s" })
       opts.formatting = {
         format = function(entry, item)
           local icons = require("lazyvim.config").icons.kinds
@@ -101,22 +89,8 @@ return {
     },
   },
   {
-    "abecodes/tabout.nvim",
-    lazy = false,
+    "kawre/neotab.nvim",
+    event = "InsertEnter",
     opts = {},
-    keys = {
-      {
-        "<A-x>",
-        "<Plug>(TaboutMulti)",
-        mode = "i",
-        desc = "Tabout Multi",
-      },
-      {
-        "<A-z>",
-        "<Plug>(TaboutBackMulti)",
-        mode = "i",
-        desc = "Tabout Back Multi",
-      },
-    },
   },
 }
