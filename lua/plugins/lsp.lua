@@ -14,7 +14,7 @@ return {
           settings = {
             texlab = {
               diagnostics = {
-                ignoredPatterns = { "Underfull", "Overfull" },
+                ignoredPatterns = { "Underfull", "Overfull", "You have requested" },
               },
             },
           },

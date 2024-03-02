@@ -34,6 +34,7 @@ return {
       vim.g.vimtex_quickfix_ignore_filters = {
         "Overfull",
         "Underfull",
+        "You have requested",
       }
       vim.g.vimtex_syntax_custom_cmds = {
         {
