@@ -4,13 +4,16 @@
 ---@param file_info FileInfo
 ---@return string
 local function GetOutputDir(file_info)
-  if file_info.jobname == "notes" then
-    return "./out/"
-  else
-    local subdir_root = file_info.root
-    ---@diagnostic disable-next-line: cast-local-type
-    subdir_root = vim.fn.fnamemodify(subdir_root, ":t")
-    return "../out/" .. subdir_root
+  local root_patterns = { "Notes", "Exercises", "Assignment", "Assessment" }
+  for _, pattern in ipairs(root_patterns) do
+    if string.find(string.lower(file_info.jobname), string.lower(pattern), 1) ~= nil then
+      return "./out/"
+    else
+      local subdir_root = file_info.root
+      ---@diagnostic disable-next-line: cast-local-type
+      subdir_root = vim.fn.fnamemodify(subdir_root, ":t")
+      return "../out/" .. subdir_root
+    end
   end
 end
 
@@ -52,6 +55,7 @@ return {
         "descriptimize",
         "descriptenum",
       }
+      vim.g.vimtex_view_method = "sioyek"
     end,
   },
 }
