@@ -212,6 +212,42 @@ return {
     },
     lazy = true,
   },
+    "Badhi/nvim-treesitter-cpp-tools",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    lazy = true,
+    cmd = {
+      "TSCppDefineClassFunc",
+      "TSCppMakeConcreteClass",
+      "TSCppRuleOf3",
+      "TSCppRuleOf5",
+    },
+    opts = {
+      preview = {
+        quit = "q",
+        accept = "<tab>",
+      },
+    },
+    keys = {
+      { "<leader>ctf", "<cmd>TSCppDefineClassFunc<cr>", desc = "Create Function Implementation" },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>ct"] = { name = "+tools (CPP)" },
+      },
+    },
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    opts = {
+      config = {
+        cpp = "// %s",
+      },
+    },
+  },
+  {
     "nvim-cmp",
     dependencies = {
       "kawre/neotab.nvim",
