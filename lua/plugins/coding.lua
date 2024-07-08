@@ -172,7 +172,10 @@ return {
   {
     "chrisgrieser/nvim-spider",
     lazy = true,
-    opts = {},
+    vscode = true,
+    opts = {
+      skipInsignificantPunctuation = false,
+    },
     keys = {
       {
         "w",
