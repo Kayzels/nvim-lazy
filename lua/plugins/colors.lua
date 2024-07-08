@@ -1,15 +1,10 @@
 return {
   {
-    "navarasu/onedark.nvim",
-    opts = {
-      style = "dark",
-      transparent = true,
-    },
-  },
-  {
     "folke/tokyonight.nvim",
     opts = function(_, opts)
+      opts.style = "moon"
       opts.transparent = true
+      opts.terminal_colors = false
       opts.styles = {
         comments = { italic = true },
         keywords = { italic = false },
@@ -20,6 +15,17 @@ return {
       }
       opts.dim_inactive = true
       opts.lualine_bold = true
+      opts.on_colors = function(colors)
+        local git_add = colors.green
+        local git_change = colors.blue1
+        local git_delete = colors.red
+        colors.git.add = git_add
+        colors.git.change = git_change
+        colors.git.delete = git_delete
+        colors.gitSignsAdd = git_add
+        colors.gitSignsChange = git_change
+        colors.gitSignsDelete = git_delete
+      end
       opts.on_highlights = function(hl, c)
         local neotree_dim = "#4f5882"
         local neotree_dark = "#444c70"
@@ -38,10 +44,6 @@ return {
         hl.Folded = {
           bg = c.bg_statusline,
         }
-        hl.NeoTreeGitModified = {
-          fg = c.cyan,
-          bold = true,
-        }
         hl.NeoTreeDimText = {
           fg = neotree_dim,
         }
@@ -54,7 +56,26 @@ return {
         }
         hl.texCConceptArg = {
           bold = true,
-          fg = c.teal,
+          fg = c.green,
+        }
+        hl.texItemLabelConcealed = hl.texCConceptArg
+        hl["@module"] = {
+          fg = c.yellow,
+        }
+        hl["@lsp.type.namespace.python"] = { link = "@module" }
+        hl["@string.documentation"] = {
+          fg = "#636da6",
+        }
+        hl["@text.title"] = {
+          bold = true,
+          fg = c.blue,
+        }
+        hl["@text.property"] = {
+          fg = c.yellow,
+        }
+        hl.texPartArgTitle = hl.Function
+        hl.texGroup = {
+          fg = c.yellow,
         }
       end
     end,
