@@ -212,6 +212,24 @@ return {
     },
     lazy = true,
   },
+  {
+    "b0o/SchemaStore.nvim",
+    version = false,
+  },
+  {
+    "danymat/neogen",
+    opts = {
+      snippet_engine = "luasnip",
+    },
+    keys = {
+      { "<leader>cnn", "<cmd>Neogen<cr>", desc = "Generate docs" },
+      { "<leader>cnf", "<cmd>Neogen func<cr>", desc = "Generate function docs" },
+      { "<leader>cnF", "<cmd>Neogen file<cr>", desc = "Generate file docs" },
+      { "<leader>cnc", "<cmd>Neogen class<cr>", desc = "Generate class docs" },
+      { "<leader>cnt", "<cmd>Neogen type<cr>", desc = "Generate type docs" },
+    },
+  },
+  {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = true,
@@ -235,6 +253,7 @@ return {
     "folke/which-key.nvim",
     opts = {
       defaults = {
+        ["<leader>cn"] = { name = "+neogen" },
         ["<leader>ct"] = { name = "+tools (CPP)" },
       },
     },
