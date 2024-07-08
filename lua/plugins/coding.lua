@@ -1,4 +1,5 @@
 return {
+  "tpope/vim-sleuth",
   {
     "L3MON4D3/LuaSnip",
     opts = function(_, opts)
@@ -150,15 +151,6 @@ return {
         end,
       }
     end,
-  },
-  {
-    "max397574/better-escape.nvim",
-    opts = {
-      mapping = { "jj", "jk", "kk", "kj" },
-      timeout = vim.o.timeoutlen,
-      clear_empty_lines = false,
-      keys = "<Esc>",
-    },
   },
   {
     "kawre/neotab.nvim",
