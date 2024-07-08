@@ -87,3 +87,7 @@ wk.register({
   ["<localleader>l"] = vimtex_nv_mappings,
 })
 wk.register(vimtex_f_mappings)
+
+local mp = require("mini.pairs")
+mp.map_buf(0, "i", "$", { action = "closeopen", pair = "$$" })
+mp.map_buf(0, "i", "`", { action = "closeopen", pair = "`'" })
