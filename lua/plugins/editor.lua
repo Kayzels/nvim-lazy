@@ -1,21 +1,5 @@
 return {
   {
-    "mrjones2014/legendary.nvim",
-    priority = 10000,
-    lazy = false,
-    dependencies = { "kkharji/sqlite.lua" },
-    opts = {
-      extensions = {
-        lazy_nvim = {
-          auto_register = true,
-        },
-        which_key = {
-          auto_register = true,
-        },
-      },
-    },
-  },
-  {
     "otavioschwanck/arrow.nvim",
     opts = function(_, opts)
       opts.show_icons = true
@@ -28,11 +12,37 @@ return {
       }
     end,
     keys = {
-      { "<leader>\\", desc = "Arrow" },
+      { "<localleader>\\", desc = "Arrow" },
     },
   },
   {
-    "RRethy/vim-illuminate",
-    enabled = false,
+    "mikavilpas/yazi.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>y",
+        function()
+          require("yazi").yazi()
+        end,
+        desc = "Explorer Yazi",
+      },
+    },
+    opts = {
+      open_for_directories = false,
+      log_level = vim.log.levels.DEBUG,
+    },
+  },
+  {
+    "folke/flash.nvim",
+    opts = {
+      modes = {
+        search = {
+          enabled = true,
+        },
+      },
+    },
   },
 }
