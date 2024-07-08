@@ -5,16 +5,19 @@
 ---@return string
 local function GetOutputDir(file_info)
   local root_patterns = { "Notes", "Exercises", "Assignment", "Assessment" }
+  local result = ""
   for _, pattern in ipairs(root_patterns) do
     if string.find(string.lower(file_info.jobname), string.lower(pattern), 1) ~= nil then
-      return "./out/"
+      result = "./out"
+      break
     else
       local subdir_root = file_info.root
       ---@diagnostic disable-next-line: cast-local-type
       subdir_root = vim.fn.fnamemodify(subdir_root, ":t")
-      return "../out/" .. subdir_root
+      result = "../out/" .. subdir_root
     end
   end
+  return result
 end
 
 return {
@@ -56,6 +59,7 @@ return {
         "descriptenum",
       }
       vim.g.vimtex_view_method = "sioyek"
+      vim.g.vimtex_view_sioyek_exe = "C:\\Users\\Kyzan\\Tools\\sioyek-release-windows\\sioyek.exe"
     end,
   },
 }
