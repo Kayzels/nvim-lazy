@@ -53,6 +53,7 @@ return {
     opts = {
       presets = {
         lsp_doc_border = true,
+        command_palette = true,
       },
       views = {
         mini = {
@@ -61,6 +62,36 @@ return {
           },
         },
       },
+      lsp = {
+        override = {
+          -- override the default lsp markdown formatter with Noice
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          -- override the lsp markdown formatter with Noice
+          ["vim.lsp.util.stylize_markdown"] = true,
+          -- override cmp documentation with Noice (needs the other options to work)
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      markdown = {
+        highlights = {
+          -- ["|%S-|"] = "@text.reference",
+          ["|%S-|"] = "@property",
+          ["@%S+"] = "@parameter",
+          ["*%S+*"] = "@text.property",
+          ["^%s*- %S+"] = "@text.property",
+          ["^%s*(Parameters:)"] = "@text.title",
+          ["^%s*(Args:)"] = "@text.title",
+          ["^%s*(Attributes:)"] = "@text.title",
+          ["^%s*(Example:)"] = "@text.title",
+          ["^%s*(Return:)"] = "@text.title",
+          ["^%s*(Raises:)"] = "@text.title",
+          ["^%s*(Returns:)"] = "@text.title",
+          ["^%s*(See also:)"] = "@text.title",
+          ["{%S-}"] = "@parameter",
+          -- ["\\*\\*(%S+)\\*\\*"] = "@property",
+        },
+      },
+      -- **text that should be bold**
     },
   },
   {
