@@ -8,7 +8,8 @@ return {
     dependencies = {
       {
         "olimorris/persisted.nvim",
-        event = "VeryLazy",
+        event = { "BufReadPre", "BufNewFile" },
+        cmd = { "SessionLoad", "SessionSave", "SessionLoadLast", "SessionStop" },
         config = function(_, opts)
           require("persisted").setup(opts)
           require("lazyvim.util").on_load("telescope.nvim", function()
