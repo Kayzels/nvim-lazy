@@ -213,6 +213,15 @@ return {
     lazy = true,
   },
   {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
+    vscode = true,
+  },
+  {
     "b0o/SchemaStore.nvim",
     version = false,
   },
