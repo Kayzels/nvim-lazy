@@ -155,7 +155,19 @@ return {
   {
     "kawre/neotab.nvim",
     event = "InsertEnter",
-    opts = {},
+    opts = {
+      pairs = {
+        { open = "(", close = ")" },
+        { open = "[", close = "]" },
+        { open = "{", close = "}" },
+        { open = "'", close = "'" },
+        { open = '"', close = '"' },
+        { open = "`", close = "`" },
+        { open = "`", close = "'" },
+        { open = "<", close = ">" },
+        { open = "$", close = "$" },
+      },
+    },
   },
   {
     "chrisgrieser/nvim-spider",
@@ -199,6 +211,27 @@ return {
       "TextCaseStartReplacingCommand",
     },
     lazy = true,
+  },
+    "nvim-cmp",
+    dependencies = {
+      "kawre/neotab.nvim",
+    },
+    keys = {
+      {
+        "<Tab>",
+        false,
+        mode = { "i", "s" },
+      },
+      {
+        "<C-Tab>",
+        function()
+          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Plug>(neotab-out)"
+        end,
+        expr = true,
+        silent = true,
+        mode = { "i", "s" },
+      },
+    },
   },
   {
     "nvim-cmp",
