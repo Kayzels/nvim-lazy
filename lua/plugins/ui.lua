@@ -234,10 +234,18 @@ return {
     --     end,
     --   })
     -- end,
+    "echasnovski/mini.icons",
     opts = {
       popup_border_style = "rounded",
       filesystem = {
         hijack_netrw_behaviour = "open_current",
+      default = {
+        file = { glyph = "󰦪" },
+      },
+      filetype = {
+        tex = {
+          glyph = "󰊄",
+        },
       },
     },
   },
