@@ -1,6 +1,19 @@
 local win = require("lspconfig.ui.windows")
 win.default_options.border = "rounded"
 
+local function toggle_ltex()
+  local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+  for _, client in pairs(buf_clients) do
+    if client.name == "ltex" then
+      client.stop()
+      return
+    end
+  end
+  vim.cmd("LspStart ltex")
+end
+
+vim.api.nvim_create_user_command("ToggleLtex", toggle_ltex, {})
+vim.keymap.set("n", "<leader>ux", "<cmd>ToggleLtex<cr>", { desc = "Toggle Ltex" })
 return {
   {
     "neovim/nvim-lspconfig",
