@@ -2,8 +2,7 @@
   // Custom environments
   "answer": {
     "prefix": [
-      "ans",
-      "answer"
+      "ans"
     ],
     "body": [
       "\\begin{answer}",
@@ -14,8 +13,7 @@
   },
   "definition": {
     "prefix": [
-      "def",
-      "definition"
+      "defn"
     ],
     "body": [
       "\\begin{definition}{${1:title}}",
@@ -26,8 +24,7 @@
   },
   "descriptenum": {
     "prefix": [
-      "denum",
-      "descriptenum"
+      "denum"
     ],
     "body": [
       "\\begin{descriptenum}",
@@ -38,8 +35,7 @@
   },
   "descriptimize": {
     "prefix": [
-      "denum",
-      "descriptimize"
+      "dimize"
     ],
     "body": [
       "\\begin{descriptimize}",
@@ -50,8 +46,7 @@
   },
   "example": {
     "prefix": [
-      "exa",
-      "example"
+      "exa"
     ],
     "body": [
       "\\begin{example}",
@@ -62,8 +57,7 @@
   },
   "example[]": {
     "prefix": [
-      "exa[]",
-      "example[]"
+      "exa[]"
     ],
     "body": [
       "\\begin{example}[${1:title}]",
@@ -74,8 +68,7 @@
   },
   "example[][]": {
     "prefix": [
-      "exa[][]",
-      "example[][]"
+      "exa[][]"
     ],
     "body": [
       "\\begin{example}[${1:title}][${2:options}]",
@@ -86,8 +79,7 @@
   },
   "exercise": {
     "prefix": [
-      "exc",
-      "exercise"
+      "exc"
     ],
     "body": [
       "\\begin{exercise}{${1:title}}",
@@ -98,8 +90,7 @@
   },
   "indentparagraph": {
     "prefix": [
-      "inp",
-      "indentparagraph"
+      "inp"
     ],
     "body": [
       "\\begin{indentparagraph}",
@@ -110,8 +101,7 @@
   },
   "question": {
     "prefix": [
-      "que",
-      "question"
+      "que"
     ],
     "body": [
       "\\begin{question}",
@@ -122,8 +112,7 @@
   },
   "sidenote": {
     "prefix": [
-      "sdn",
-      "sidenote"
+      "sdn"
     ],
     "body": [
       "\\begin{sidenote}{${1:title}}",
@@ -134,8 +123,7 @@
   },
   "theorem": {
     "prefix": [
-      "thm",
-      "theorem"
+      "thm"
     ],
     "body": [
       "\\begin{theorem}{${1:title}}",
@@ -147,8 +135,6 @@
   // Builtin environments
   "env": {
     "prefix": [
-      "begin",
-      "\\begin",
       "env"
     ],
     "body": [
@@ -160,8 +146,7 @@
   },
   "description": {
     "prefix": [
-      "desc",
-      "description"
+      "desc"
     ],
     "body": [
       "\\begin{description}",

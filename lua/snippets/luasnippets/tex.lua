@@ -181,7 +181,7 @@ local snippets = {
     },
     fmta(
       [[
-        \begin{exercise}[<>]
+        \begin{exercise}{<>}
           <>
         \end{exercise}
       ]],
@@ -295,7 +295,7 @@ local snippets = {
     fmta(
       [[
         \providecommand{\main}{..}
-        \documentclass[../notes.tex]{subfiles}
+        \documentclass[<>]{subfiles}
 
         \begin{document}
           \setcounter{chapter}{<>}
@@ -303,8 +303,9 @@ local snippets = {
         \end{document}
       ]],
       {
-        i(1, "number - 1"),
-        i(2, "title"),
+        i(1, "mainfile"),
+        i(2, "number - 1"),
+        i(3, "title"),
       }
     )
   ),
