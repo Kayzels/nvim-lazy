@@ -181,16 +181,19 @@ return {
         "w",
         "<cmd>lua require('spider').motion('w')<CR>",
         mode = { "n", "o", "x" },
+        desc = "Next word",
       },
       {
         "e",
         "<cmd>lua require('spider').motion('e')<CR>",
         mode = { "n", "o", "x" },
+        desc = "Next end of word",
       },
       {
         "b",
         "<cmd>lua require('spider').motion('b')<CR>",
         mode = { "n", "o", "x" },
+        desc = "Previous end of word",
       },
     },
   },
@@ -267,11 +270,17 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      defaults = {
-        ["<leader>cn"] = { name = "+neogen" },
-        ["<leader>ct"] = { name = "+tools (CPP)" },
+      spec = {
+        { "<leader>cn", group = "neogen" },
+        { "<leader>ct", group = "tools (CPP)" },
       },
     },
+    -- opts = {
+    --   defaults = {
+    --     ["<leader>cn"] = { name = "+neogen" },
+    --     ["<leader>ct"] = { name = "+tools (CPP)" },
+    --   },
+    -- },
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",

@@ -43,8 +43,25 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      window = {
+      win = {
         border = "rounded",
+        title = true,
+        title_pos = "center",
+      },
+      spec = {
+        { "f", desc = "Move to next character" },
+        { "F", desc = "Move to prev character" },
+        { "t", desc = "Move before next chaacter" },
+        { "T", desc = "Move before prev character" },
+        { "H", desc = "Prev buffer" },
+        { "L", desc = "Next buffer" },
+        { "M", desc = "which_key_ignore" },
+        { "Y", desc = "Yank to end of line" },
+        { "&", desc = "Repeat last substitute" },
+        { "%", desc = "Matching character" },
+        { "<C-Z>", desc = "which_key_ignore" },
+        { ",", desc = "Repeat find character backwards" },
+        { ";", desc = "Repeat find character forwards" },
       },
     },
   },
