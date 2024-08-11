@@ -3,7 +3,7 @@ vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus<cr>", { desc = "Neotree foc
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
+    -- enabled = false,
     opts = {
       popup_border_style = "rounded",
       sort_case_insensitive = true,
