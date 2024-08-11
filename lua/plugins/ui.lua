@@ -267,9 +267,12 @@ return {
 
       opts.window = {
         padding = 0,
-        margin = { horizontal = 0 },
+        margin = { horizontal = 0, vertical = 0 },
       }
 
+      ---@alias RenderProp {buf: number, win:number, focused: boolean}
+      ---@param props RenderProp
+      ---@return table
       opts.render = function(props)
         local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
         local ft_icon = ""
@@ -284,21 +287,26 @@ return {
         if ft_icon ~= "" then
           ft_icon = " " .. ft_icon .. " "
         end
-        local modified = vim.bo[props.buf].modified
 
-        local h_group = "lualine_a" .. lualine_highlight.get_mode_suffix()
+        local lualine_field = "lualine_"
+        if props.focused == true then
+          lualine_field = lualine_field .. "a"
+        else
+          lualine_field = lualine_field .. "b"
+        end
+
+        local h_group = lualine_field .. lualine_highlight.get_mode_suffix()
         local colors = lualine_highlight.get_lualine_hl(h_group)
 
         local res = {
-          { "", guifg = colors.bg, guibg = colors.fg },
-          ft_icon,
-          { filename .. " ", gui = "bold" },
-          guibg = colors.bg,
-          guifg = colors.fg,
+          { "", guifg = colors.bg, guibg = "none" },
+          { ft_icon, group = h_group },
+          { filename .. " ", group = h_group },
         }
 
+        local modified = vim.bo[props.buf].modified
         if modified then
-          table.insert(res, { " ● " })
+          table.insert(res, { " ● ", group = h_group })
         end
 
         return res
