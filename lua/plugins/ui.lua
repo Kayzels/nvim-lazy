@@ -67,6 +67,13 @@ return {
   },
   {
     "folke/noice.nvim",
+    config = function(_, opts)
+      -- NOTE: Calling explicitly rather than using LazyVim way,
+      -- because LazyVim config clears messages
+      require("noice").setup(opts)
+    end,
+    -- NOTE: Using this version due to weird cursor jumping on latest
+    version = "4.4.7",
     opts = {
       presets = {
         lsp_doc_border = true,
