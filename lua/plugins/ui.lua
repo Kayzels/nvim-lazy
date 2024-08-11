@@ -202,16 +202,6 @@ return {
             end
           end,
         },
-        {
-          function()
-            return "venv: " .. vim.fn.fnamemodify(require("venv-selector").get_active_venv(), ":h:t")
-          end,
-          cond = function()
-            return conditions.hide_in_width
-              and package.loaded["venv-selector"]
-              and require("venv-selector").get_active_venv() ~= nil
-          end,
-        },
         lsp,
         { "filetype", padding = { left = 1, right = 1 }, icon = { align = "right" }, cond = conditions.hide_in_width },
       }
