@@ -259,4 +259,28 @@ return {
     end,
     event = "VeryLazy",
   },
+  {
+    "echasnovski/mini.hipatterns",
+    opts = function()
+      local hi = require("mini.hipatterns")
+      return {
+        highlighters = {
+          hex_color = hi.gen_highlighter.hex_color(),
+          zero_x_hex = {
+            pattern = "0x%x%x%x%x%x%x",
+            ---@param _ any
+            ---@param match string
+            group = function(_, match)
+              ---@type string
+              local color = match:gsub("0x", "#")
+              return MiniHipatterns.compute_hex_color_group(color, "bg")
+            end,
+          },
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("mini.hipatterns").setup(opts)
+    end,
+  },
 }
