@@ -1,6 +1,8 @@
 return {
   {
     "folke/tokyonight.nvim",
+    -- Set high priority so that it shows in Telescope colorscheme list
+    priority = 1000,
     opts = function(_, opts)
       opts.style = "moon"
       opts.transparent = true
@@ -81,9 +83,52 @@ return {
     end,
   },
   {
+    "https://github.com/catppuccin/nvim",
+    -- Set high priority so that it shows in Telescope colorscheme list
+    priority = 1000,
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+    end,
+    opts = {
+      term_colors = false,
+      -- term_colors = true,
+      dim_inactive = {
+        enabled = false,
+        shade = "dark",
+        percentage = 0.15,
+      },
+      styles = {
+        comments = { "italic" },
+        conditionals = {},
+        keywords = {},
+        functions = { "bold" },
+      },
+      custom_highlights = function(colors)
+        return {
+          texCConceptArg = { fg = colors.maroon, style = { "bold" } },
+          texItemLabelConcealed = { link = "texCConceptArg" },
+          cmpGhostText = { fg = colors.surface0 },
+          texPartArgTitle = { link = "Function" },
+        }
+      end,
+      integrations = {
+        cmp = true,
+        dashboard = true,
+        gitsigns = true,
+        leap = true,
+        noice = true,
+        notify = true,
+        telescope = true,
+        treesitter = true,
+        which_key = true,
+      },
+    },
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "tokyonight",
+      -- colorscheme = "catppuccin-latte",
     },
   },
 }

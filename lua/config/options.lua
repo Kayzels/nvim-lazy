@@ -8,6 +8,8 @@ vim.opt.foldtext = ""
 vim.opt.listchars:append({ tab = " " })
 vim.opt.scrolloff = 10
 
+vim.opt.showtabline = 1
+
 -- Appearance for diagnostic popups
 vim.diagnostic.config({
   float = { border = "rounded" },

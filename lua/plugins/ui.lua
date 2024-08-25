@@ -62,6 +62,7 @@ return {
         { "<C-Z>", desc = "which_key_ignore" },
         { ",", desc = "Repeat find character backwards" },
         { ";", desc = "Repeat find character forwards" },
+        { "<leader>ub", desc = "Toggle Dark/Light" },
       },
     },
   },
@@ -122,11 +123,10 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       local icons = require("lazyvim.config").icons
-      local custom_auto = require("lualine.themes.auto")
-      custom_auto.normal.c.bg = "None"
-      custom_auto.inactive.c.bg = "None"
+      local auto = require("config.functions").getLualineAuto()
+      vim.opt.showtabline = 1
       opts.options = {
-        theme = custom_auto,
+        theme = auto,
         section_separators = { left = "", right = "" },
         component_separators = "▎",
         disabled_filetypes = {
@@ -246,61 +246,16 @@ return {
   },
   {
     "b0o/incline.nvim",
-    -- TODO: Inactive winbar shouldn't have color
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-lualine/lualine.nvim",
     },
     opts = function(_, opts)
-      local devicons = require("nvim-web-devicons")
-      local lualine_highlight = require("lualine.highlight")
-
       opts.window = {
         padding = 0,
         margin = { horizontal = 0, vertical = 0 },
       }
-
-      ---@alias RenderProp {buf: number, win:number, focused: boolean}
-      ---@param props RenderProp
-      ---@return table
-      opts.render = function(props)
-        local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-        local ft_icon = ""
-        if filename == "" then
-          filename = "[No Name]"
-        else
-          ft_icon = devicons.get_icon(filename)
-          if ft_icon == nil then
-            ft_icon = ""
-          end
-        end
-        if ft_icon ~= "" then
-          ft_icon = " " .. ft_icon .. " "
-        end
-
-        local lualine_field = "lualine_"
-        if props.focused == true then
-          lualine_field = lualine_field .. "a"
-        else
-          lualine_field = lualine_field .. "b"
-        end
-
-        local h_group = lualine_field .. lualine_highlight.get_mode_suffix()
-        local colors = lualine_highlight.get_lualine_hl(h_group)
-
-        local res = {
-          { "", guifg = colors.bg, guibg = "none" },
-          { ft_icon, group = h_group },
-          { filename .. " ", group = h_group },
-        }
-
-        local modified = vim.bo[props.buf].modified
-        if modified then
-          table.insert(res, { " ● ", group = h_group })
-        end
-
-        return res
-      end
+      opts.render = require("config.functions").inclineRender
     end,
     event = "VeryLazy",
   },

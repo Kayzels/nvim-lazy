@@ -34,3 +34,18 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   pattern = "*",
   command = "set guicursor=a:ver25-blinkwait700-blinkoff400-blinkon250",
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    local auto = require("config.functions").getLualineAuto()
+    require("lualine").setup({
+      options = {
+        theme = auto,
+      },
+    })
+    require("incline").setup({
+      render = require("config.functions").inclineRender,
+    })
+    vim.opt.showtabline = 1
+  end,
+})

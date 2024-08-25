@@ -16,3 +16,6 @@ vim.keymap.set("n", "<C-Space>", function()
 end, { desc = "which_key_ignore" })
 vim.keymap.set("n", "U", "<cmd>redo<cr>", { silent = true, desc = "Redo" })
 vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
+
+vim.keymap.del("n", "<leader>ub")
+vim.keymap.set("n", "<leader>ub", "<cmd>ToggleLight<cr>", { desc = "Toggle Light Mode" })
