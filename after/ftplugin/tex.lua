@@ -3,6 +3,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.colorcolumn = "100"
 vim.g.autoformat = false
+vim.opt_local.spell = true
 
 local wk = require("which-key")
 wk.add({
