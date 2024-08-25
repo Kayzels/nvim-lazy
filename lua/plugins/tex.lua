@@ -49,6 +49,12 @@ return {
           opt = false,
           argstyle = "bold",
         },
+        {
+          name = "Diamond",
+          mathmode = true,
+          concealchar = "◇",
+          opt = false,
+        },
       }
       vim.g.vimtex_indent_lists = {
         "itemize",
