@@ -264,7 +264,7 @@ return {
       },
     },
     keys = {
-      { "<leader>ctf", "<cmd>TSCppDefineClassFunc<cr>", desc = "Create Function Implementation" },
+      { "<localleader>ctf", "<cmd>TSCppDefineClassFunc<cr>", desc = "Create Function Implementation" },
     },
   },
   {
@@ -272,7 +272,7 @@ return {
     opts = {
       spec = {
         { "<leader>cn", group = "neogen" },
-        { "<leader>ct", group = "tools (CPP)" },
+        { "<localleader>ct", group = "tools (CPP)" },
       },
     },
     -- opts = {
