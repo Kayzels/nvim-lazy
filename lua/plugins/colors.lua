@@ -90,6 +90,7 @@ return {
       require("catppuccin").setup(opts)
     end,
     opts = {
+      transparent_background = true,
       term_colors = false,
       -- term_colors = true,
       dim_inactive = {
@@ -105,17 +106,25 @@ return {
       },
       custom_highlights = function(colors)
         return {
-          texCConceptArg = { fg = colors.maroon, style = { "bold" } },
+          texCConceptArg = { fg = colors.sky, style = { "bold" } },
+          -- texCConceptArg = { fg = colors.maroon, style = { "bold" } },
           texItemLabelConcealed = { link = "texCConceptArg" },
           cmpGhostText = { fg = colors.surface0 },
           texPartArgTitle = { link = "Function" },
+          texGroup = { fg = colors.maroon, style = { "bold " } },
+          MatchParen = { fg = colors.peach, bg = colors.none, style = { "bold" } },
         }
       end,
       integrations = {
         cmp = true,
         dashboard = true,
+        flash = true,
         gitsigns = true,
         leap = true,
+        mini = {
+          enabled = true,
+          indentscope_color = "sky",
+        },
         noice = true,
         notify = true,
         telescope = true,
@@ -126,9 +135,14 @@ return {
   },
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight",
+    opts = function(_, opts)
+      local color_mode = vim.api.nvim_get_var("color_mode")
+      if not color_mode or color_mode ~= "light" then
+        opts.colorscheme = "tokyonight"
+      else
+        opts.colorscheme = "catppuccin-latte"
+      end
       -- colorscheme = "catppuccin-latte",
-    },
+    end,
   },
 }
