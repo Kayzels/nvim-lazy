@@ -67,9 +67,11 @@ function M.toggleLight()
   if vim.opt.background:get() == "dark" then
     vim.opt.background = "light"
     vim.cmd.colorscheme(light_theme)
+    vim.cmd([[call system("SetColorMode light")]])
   elseif vim.opt.background:get() == "light" then
     vim.opt.background = "dark"
     vim.cmd.colorscheme(dark_theme)
+    vim.cmd([[call system("SetColorMode dark")]])
   end
 end
 
