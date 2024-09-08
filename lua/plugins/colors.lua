@@ -5,19 +5,26 @@ return {
     priority = 1000,
     opts = function(_, opts)
       opts.style = "moon"
-      opts.transparent = true
+      opts.transparent = false
+      -- opts.transparent = true
       opts.terminal_colors = false
       opts.styles = {
         comments = { italic = true },
         keywords = { italic = false },
         functions = { bold = true },
         variables = {},
-        sidebars = "transparent",
-        floats = "transparent",
+        sidebars = "normal",
+        floats = "normal",
+        -- sidebars = "transparent",
+        -- floats = "transparent",
       }
       opts.dim_inactive = true
       opts.lualine_bold = true
       opts.on_colors = function(colors)
+        colors.bg = "#1d262a"
+        colors.bg_dark = colors.bg
+        colors.bg_float = colors.bg
+        colors.bg_sidebar = colors.bg
         local git_add = colors.green
         local git_change = colors.blue1
         local git_delete = colors.red
@@ -90,7 +97,7 @@ return {
       require("catppuccin").setup(opts)
     end,
     opts = {
-      transparent_background = true,
+      -- transparent_background = true,
       term_colors = false,
       -- term_colors = true,
       dim_inactive = {
