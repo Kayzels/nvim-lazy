@@ -40,3 +40,6 @@ vim.g.lazyvim_statuscolumn = {
   folds_open = false,
   folds_githl = true,
 }
+
+-- Don't let LazyVim set the theme for lazygit, because it messes up Wezterm theme change
+vim.g.lazygit_config = false
