@@ -67,6 +67,9 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       }
+      opts.matching = {
+        disallow_fuzzy_matching = false,
+      }
       opts.sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "path" },
