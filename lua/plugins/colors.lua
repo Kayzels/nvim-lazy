@@ -97,7 +97,8 @@ return {
       require("catppuccin").setup(opts)
     end,
     opts = {
-      -- transparent_background = true,
+      flavour = "latte",
+      transparent_background = true,
       term_colors = false,
       -- term_colors = true,
       dim_inactive = {
@@ -120,6 +121,8 @@ return {
           texPartArgTitle = { link = "Function" },
           texGroup = { fg = colors.maroon, style = { "bold " } },
           MatchParen = { fg = colors.peach, bg = colors.none, style = { "bold" } },
+          TelescopeSelection = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
+          Folded = { fg = colors.blue, bg = colors.surface0 },
         }
       end,
       integrations = {
