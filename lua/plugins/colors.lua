@@ -145,14 +145,8 @@ return {
   },
   {
     "LazyVim/LazyVim",
-    opts = function(_, opts)
-      local color_mode = vim.api.nvim_get_var("color_mode")
-      if not color_mode or color_mode ~= "light" then
-        opts.colorscheme = "tokyonight"
-      else
-        opts.colorscheme = "catppuccin-latte"
-      end
-      -- colorscheme = "catppuccin-latte",
-    end,
+    opts = {
+      colorscheme = require("config.functions").setColorScheme,
+    },
   },
 }
