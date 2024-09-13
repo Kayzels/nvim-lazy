@@ -1,3 +1,77 @@
+---@class TextCaseMapping
+---@field key string
+---@field case string
+---@field lsp string
+---@field desc string
+
+---@param opts TextCaseMapping
+local function setMapping(opts)
+  local key = opts.key
+  local case = opts.case
+  local lsp = opts.lsp
+  local desc = opts.desc
+  local n_mode = {
+    "ga" .. key,
+    function()
+      require("textcase").current_word(case)
+    end,
+    desc = "Convert " .. desc,
+  }
+  local lsp_mode = {
+    "ga" .. lsp,
+    function()
+      require("textcase").lsp_rename(case)
+    end,
+    desc = "LSP rename " .. desc,
+  }
+  local op_mode = {
+    "gao" .. key,
+    function()
+      require("textcase").operator(case)
+    end,
+    desc = desc,
+  }
+  local x_mode = {
+    "ga" .. key,
+    function()
+      require("textcase").operator(case)
+    end,
+    desc = "Convert " .. desc,
+    mode = { "x" },
+  }
+  return { n_mode, lsp_mode, op_mode, x_mode }
+end
+
+local function setTextCaseMappings()
+  require("which-key").add({ "ga", group = "Text Case" })
+  require("which-key").add({ "gao", group = "Pending Mode Operator" })
+  ---@type TextCaseMapping[]
+  local defs = {
+    { key = "u", case = "to_upper_case", lsp = "U", desc = "TO UPPER CASE" },
+    { key = "l", case = "to_lower_case", lsp = "L", desc = "to lower case" },
+    { key = "s", case = "to_snake_case", lsp = "S", desc = "to_snake_case" },
+    { key = "k", case = "to_dash_case", lsp = "K", desc = "to-kebab-case" },
+    { key = "n", case = "to_constant_case", lsp = "N", desc = "TO_CONSTANT_CASE" },
+    { key = "d", case = "to_dot_case", lsp = "D", desc = "to.dot.case" },
+    { key = "c", case = "to_camel_case", lsp = "C", desc = "toCamelCase" },
+    { key = "p", case = "to_pascal_case", lsp = "P", desc = "ToPascalCase" },
+    { key = "t", case = "to_title_case", lsp = "T", desc = "To Title Case" },
+    { key = "/", case = "to_path_case", lsp = "?", desc = "to/path/case" },
+    { key = "f", case = "to_phrase_case", lsp = "F", desc = "To phrase case" },
+  }
+
+  local mappings = {}
+  table.insert(mappings, { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" })
+  for _, def in ipairs(defs) do
+    local mapping = setMapping(def)
+    for _, v in ipairs(mapping) do
+      table.insert(mappings, v)
+    end
+  end
+
+  return mappings
+end
+
 return {
   "tpope/vim-sleuth",
   {
@@ -201,20 +275,22 @@ return {
     },
   },
   {
-    -- NOTE: Only using this fork until merged into "johmsalas/text-case.nvim"
-    "theutz/text-case.nvim",
+    -- NOTE: Changed from using theutz fork, but PR wasn't merged.
+    -- Implemented the changes in the function I call in keys.
+    "johmsalas/text-case.nvim",
     vscode = true,
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("textcase").setup()
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "folke/which-key.nvim",
+    },
+    config = function(_, opts)
+      require("textcase").setup(opts)
       require("telescope").load_extension("textcase")
     end,
-    keys = function()
-      vim.keymap.set({ "n", "x" }, "ga.", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Telescope" })
-      return {
-        { "ga" },
-      }
-    end,
+    opts = {
+      default_keymappings_enabled = false,
+    },
+    keys = setTextCaseMappings,
     cmd = {
       "Subs",
       "TextCaseOpenTelescope",
@@ -222,7 +298,6 @@ return {
       "TextCaseOpenTelescopeLSPChange",
       "TextCaseStartReplacingCommand",
     },
-    lazy = true,
   },
   {
     "kylechui/nvim-surround",
