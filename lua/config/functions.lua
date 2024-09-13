@@ -61,18 +61,45 @@ function M.getLualineAuto()
   return auto
 end
 
-function M.toggleLight()
+---@param mode "light" | "dark"
+---@param opts? { update: boolean? }
+local function _setScheme(mode, opts)
   local light_theme = "catppuccin-latte"
   local dark_theme = "tokyonight-moon"
-  if vim.opt.background:get() == "dark" then
-    vim.opt.background = "light"
-    vim.cmd.colorscheme(light_theme)
-    vim.cmd([[call system("SetColorMode light")]])
-  elseif vim.opt.background:get() == "light" then
-    vim.opt.background = "dark"
+  vim.opt.background = mode
+  if mode == "dark" then
     vim.cmd.colorscheme(dark_theme)
-    vim.cmd([[call system("SetColorMode dark")]])
+  else
+    -- require("catppuccin").setup({ transparent_background = true })
+    vim.cmd.colorscheme(light_theme)
+    vim.cmd("Catppuccin latte")
+  end
+  if opts ~= nil and opts.update then
+    local command = 'call system("SetColorMode ' .. mode .. '")'
+    vim.cmd(command)
   end
 end
 
+function M.setColorScheme()
+  local background = vim.opt.background:get()
+  if background ~= "light" and background ~= "dark" then
+    return
+  end
+  _setScheme(background)
+end
+
+function M.toggleLight()
+  local background = vim.opt.background:get()
+  if background ~= "light" and background ~= "dark" then
+    return
+  end
+  ---@type "light" | "dark"
+  local new_background
+  if background == "dark" then
+    new_background = "light"
+  else
+    new_background = "dark"
+  end
+  _setScheme(new_background, { update = true })
+end
 return M
