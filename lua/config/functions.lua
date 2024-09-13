@@ -102,4 +102,22 @@ function M.toggleLight()
   end
   _setScheme(new_background, { update = true })
 end
+
+function M.toggleBackgroundImage()
+  -- Do it this way instead of using lua os.get_env
+  -- Needed because its a user variable rather than host
+  local backFull = vim.fn.system("[Environment]::GetEnvironmentVariable('WezBack', 'User')")
+  local lines = {}
+  for s in backFull:gmatch("[^\r\n]+") do
+    table.insert(lines, s)
+  end
+  local backgroundSet = lines[#lines]
+
+  if backgroundSet == "true" then
+    vim.cmd([[call system("setUseBack $false")]])
+  else
+    vim.cmd([[call system("setUseBack $true")]])
+  end
+end
+
 return M
