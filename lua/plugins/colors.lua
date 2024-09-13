@@ -3,28 +3,28 @@ return {
     "folke/tokyonight.nvim",
     -- Set high priority so that it shows in Telescope colorscheme list
     priority = 1000,
-    opts = function(_, opts)
-      opts.style = "moon"
-      opts.transparent = false
-      -- opts.transparent = true
-      opts.terminal_colors = false
-      opts.styles = {
+    opts = {
+      style = "moon",
+      -- opts.transparent = false
+      transparent = true,
+      terminal_colors = false,
+      styles = {
         comments = { italic = true },
         keywords = { italic = false },
         functions = { bold = true },
         variables = {},
-        sidebars = "normal",
-        floats = "normal",
-        -- sidebars = "transparent",
-        -- floats = "transparent",
-      }
-      opts.dim_inactive = true
-      opts.lualine_bold = true
-      opts.on_colors = function(colors)
-        colors.bg = "#1d262a"
-        colors.bg_dark = colors.bg
-        colors.bg_float = colors.bg
-        colors.bg_sidebar = colors.bg
+        -- sidebars = "normal",
+        -- floats = "normal",
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+      dim_inactive = true,
+      lualine_bold = true,
+      on_colors = function(colors)
+        -- colors.bg = "#1d262a"
+        -- colors.bg_dark = colors.bg
+        -- colors.bg_float = colors.bg
+        -- colors.bg_sidebar = colors.bg
         local git_add = colors.green
         local git_change = colors.blue1
         local git_delete = colors.red
@@ -34,8 +34,8 @@ return {
         colors.gitSignsAdd = git_add
         colors.gitSignsChange = git_change
         colors.gitSignsDelete = git_delete
-      end
-      opts.on_highlights = function(hl, c)
+      end,
+      on_highlights = function(hl, c)
         local neotree_dim = "#4f5882"
         local neotree_dark = "#444c70"
         hl.VertSplit = {
@@ -86,8 +86,8 @@ return {
         hl.texGroup = {
           fg = c.yellow,
         }
-      end
-    end,
+      end,
+    },
   },
   {
     "https://github.com/catppuccin/nvim",
