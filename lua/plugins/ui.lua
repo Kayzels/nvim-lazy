@@ -255,7 +255,18 @@ return {
         padding = 0,
         margin = { horizontal = 0, vertical = 0 },
       }
-      opts.render = require("config.functions").inclineRender
+      opts.render = require("functions.bars").inclineRender
+      opts.ignore = {
+        buftypes = function(bufnr, buftype)
+          if (buftype == "") or (buftype == "help") then
+            return false
+          end
+          return true
+        end,
+        -- wintypes = { "autocmd", "command", "loclist", "preview", "quickfix" },
+        filetypes = { "dashboard", "TelescopePrompt", "noice" },
+        unlisted_buffers = false,
+      }
     end,
     event = "VeryLazy",
   },
