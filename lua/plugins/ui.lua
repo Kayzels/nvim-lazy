@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 local MIN_WIDTH = 120
 
 local conditions = {
@@ -227,6 +225,13 @@ return {
             cond = function()
               return #vim.fn.gettabinfo() > 1
             end,
+            separator = { left = "", right = "" },
+            section_separators = { left = "", right = "" },
+            use_mode_colors = true,
+            tabs_color = {
+              active = require("functions.bars").getModeColor(true),
+              inactive = require("functions.bars").getModeColor(false),
+            },
           },
         },
         lualine_b = {},
@@ -239,9 +244,17 @@ return {
             cond = function()
               return #vim.fn.gettabinfo() > 1
             end,
+            separator = { left = "", right = "" },
+            section_separators = { left = "", right = "" },
+            use_mode_colors = true,
+            windows_color = {
+              active = require("functions.bars").getModeColor(true),
+              inactive = require("functions.bars").getModeColor(false),
+            },
           },
         },
       }
+
       if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
         -- Get trouble symbols here, before setting sections
         local symbols = require("functions.bars").troubleStatusLine({

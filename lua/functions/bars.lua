@@ -1,5 +1,23 @@
 local M = {}
 
+---Gets the color that should be used for the bars, based on mode
+---@param active boolean
+---@return fun() : string
+function M.getModeColor(active)
+  ---@type string
+  local lualine_index
+  if active then
+    lualine_index = "a"
+  else
+    lualine_index = "b"
+  end
+  ---@return string
+  return function()
+    local suffix = require("lualine.highlight").get_mode_suffix()
+    return "lualine_" .. lualine_index .. suffix
+  end
+end
+
 ---@alias RenderProp {buf: number, win:number, focused: boolean}
 
 --- Sets the way that incline.nvim displays its winbar.
@@ -24,14 +42,7 @@ function M.inclineRender(props)
     ft_icon = " " .. ft_icon .. " "
   end
 
-  local lualine_field = "lualine_"
-  if props.focused == true then
-    lualine_field = lualine_field .. "a"
-  else
-    lualine_field = lualine_field .. "b"
-  end
-
-  local h_group = lualine_field .. lualine_highlight.get_mode_suffix()
+  local h_group = M.getModeColor(props.focused)()
   local colors = lualine_highlight.get_lualine_hl(h_group)
 
   local res = {
