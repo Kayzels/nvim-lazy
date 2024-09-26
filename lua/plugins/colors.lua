@@ -34,6 +34,7 @@ return {
         colors.gitSignsAdd = git_add
         colors.gitSignsChange = git_change
         colors.gitSignsDelete = git_delete
+        colors.bg_statusline = colors.none
       end,
       on_highlights = function(hl, c)
         local neotree_dim = "#4f5882"
@@ -86,6 +87,8 @@ return {
         hl.texGroup = {
           fg = c.yellow,
         }
+        hl["lualine_c_normal"] = "NONE"
+        hl["lualine_c_inactive"] = "NONE"
       end,
     },
   },
@@ -120,9 +123,13 @@ return {
           cmpGhostText = { fg = colors.surface0 },
           texPartArgTitle = { link = "Function" },
           texGroup = { fg = colors.maroon, style = { "bold " } },
-          MatchParen = { fg = colors.peach, bg = colors.none, style = { "bold" } },
+          -- MatchParen = { fg = colors.peach, bg = colors.none, style = { "bold" } },
           TelescopeSelection = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
           Folded = { fg = colors.blue, bg = colors.surface0 },
+          -- Change comment back to original overlay0: the change to overlay2 makes it harder
+          -- to distinguish comments from code.
+          -- Not sure how to access opts table, so setting style here as well.
+          Comment = { fg = colors.overlay0, style = { "italic" } },
         }
       end,
       integrations = {
@@ -139,14 +146,14 @@ return {
         notify = true,
         telescope = true,
         treesitter = true,
-        which_key = true,
+        -- which_key = true,
       },
     },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = require("config.functions").setColorScheme,
+      colorscheme = require("functions.theme").setColorScheme,
     },
   },
 }
