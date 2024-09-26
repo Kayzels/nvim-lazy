@@ -49,3 +49,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.opt.showtabline = 1
   end,
 })
+-- Disable minipairs completing `` in some files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gitcommit", "markdown", "tex" },
+  callback = function(event)
+    vim.keymap.set("i", "`", "`", { buffer = event.buf })
+  end,
+})
