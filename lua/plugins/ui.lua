@@ -121,30 +121,43 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "folke/trouble.nvim",
+    },
     opts = function(_, opts)
       local icons = require("lazyvim.config").icons
-      local auto = require("config.functions").getLualineAuto()
       vim.opt.showtabline = 1
+
       opts.options = {
-        theme = auto,
+        -- theme = auto,
+        theme = "auto",
         section_separators = { left = "", right = "" },
         component_separators = "▎",
         disabled_filetypes = {
           tabline = { "neo-tree", "dashboard" },
           winbar = { "neo-tree", "dashboard" },
+          -- statusline = { "dashboard", "lazyterm", "yazi" },
         },
       }
 
-      ---@diagnostic disable-next-line: assign-type-mismatch
-      local root = require("lazyvim.util").lualine.root_dir({ cwd = true })
-      root.padding = { left = 1, right = 2 }
-      root.color = nil
+      opts.sections["lualine_a"] = {
+        { "mode", separator = { left = "" }, right_padding = 2 },
+      }
 
+      -- Set lualine_b to always contain the cwd, and lualine_c to show when root is different from cwd
+      -- Means that lualine_c config doesn't change from default LazyVim
       opts.sections["lualine_b"] = {
-        root,
+        {
+          function()
+            return vim.fs.basename(LazyVim.root.cwd())
+          end,
+          padding = { left = 2, right = 2 },
+          color = nil,
+        },
         { "branch", padding = { left = 1, right = 1 } },
       }
       opts.sections["lualine_c"] = {
+        LazyVim.lualine.root_dir(),
         {
           "diagnostics",
           symbols = {
@@ -171,18 +184,18 @@ return {
         {
           function() return require("noice").api.status.mode.get() end,
           cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-          color = Util.ui.fg("Constant"),
+          color = LazyVim.ui.fg("Constant"),
         },
         -- stylua: ignore
         {
           function() return "  " .. require("dap").status() end,
           cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-          color = Util.ui.fg("Debug"),
+          color = LazyVim.ui.fg("Debug"),
         },
         {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
-          color = Util.ui.fg("Special"),
+          color = LazyVim.ui.fg("Special"),
         },
         {
           "diff",
@@ -206,7 +219,7 @@ return {
         { "filetype", padding = { left = 1, right = 1 }, icon = { align = "right" }, cond = conditions.hide_in_width },
       }
       opts.sections["lualine_y"] = { "progress" }
-      opts.sections["lualine_z"] = { "location" }
+      opts.sections["lualine_z"] = { { "location", separator = { right = "" }, left_padding = 1 } }
       opts.tabline = {
         lualine_a = {
           {
@@ -229,6 +242,24 @@ return {
           },
         },
       }
+      if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
+        -- Get trouble symbols here, before setting sections
+        local symbols = require("functions.bars").troubleStatusLine({
+          mode = "symbols",
+          groups = {},
+          title = false,
+          filter = { range = true },
+          format = "{kind_icon}{symbol.name}",
+          hl_group = "lualine_c_normal",
+        })
+        table.insert(opts.sections.lualine_c, {
+          symbols and symbols.get,
+          cond = function()
+            return vim.b.trouble_lualine ~= false and symbols.has()
+          end,
+          fmt = require("functions.bars").trunc(250, 80, 150, false),
+        })
+      end
     end,
   },
   {
