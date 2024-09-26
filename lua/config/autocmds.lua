@@ -37,18 +37,24 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
-    local auto = require("config.functions").getLualineAuto()
-    require("lualine").setup({
-      options = {
-        theme = auto,
-      },
-    })
+    -- local auto = require("functions.bars").getLualineTheme()
+    -- require("lualine").setup({
+    --   options = {
+    --     theme = auto,
+    --   },
+    -- })
+    -- NOTE: Needed, because otherwise it weirdly inverts some colors
     require("incline").setup({
-      render = require("config.functions").inclineRender,
+      render = require("functions.bars").inclineRender,
     })
+
+    -- The component for plugin updates and recording messages doesn't update
+    -- automatically, so force this update.
+    require("functions.bars").updateLualineSectionX()
     vim.opt.showtabline = 1
   end,
 })
+
 -- Disable minipairs completing `` in some files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "gitcommit", "markdown", "tex" },
