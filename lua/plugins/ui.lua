@@ -105,14 +105,13 @@ return {
       vim.opt.showtabline = 1
 
       opts.options = {
-        -- theme = auto,
         theme = "auto",
         section_separators = { left = "", right = "" },
         component_separators = "▎",
         disabled_filetypes = {
           tabline = { "neo-tree", "dashboard" },
           winbar = { "neo-tree", "dashboard" },
-          -- statusline = { "dashboard", "lazyterm", "yazi" },
+          statusline = { "dashboard" },
         },
       }
 
@@ -146,12 +145,6 @@ return {
         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         {
           require("lazyvim.util").lualine.pretty_path(),
-          ---@param s string
-          ---@return string
-          fmt = function(s)
-            local subbed = s:gsub("\\", "/")
-            return subbed
-          end,
         },
       }
       opts.sections["lualine_x"] = {
@@ -248,7 +241,7 @@ return {
           cond = function()
             return vim.b.trouble_lualine ~= false and symbols.has()
           end,
-          fmt = require("functions.bars").trunc(250, 80, 150, false),
+          fmt = require("functions.bars").trunc(250, 80, 150),
         })
       end
     end,
