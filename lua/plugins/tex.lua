@@ -4,7 +4,7 @@
 ---@param file_info FileInfo
 ---@return string
 local function GetOutputDir(file_info)
-  local root_patterns = { "Notes", "Exercises", "Assignment", "Assessment" }
+  local root_patterns = { "Notes", "Exercises", "Assignment", "Assessment", "Exam" }
   local result = ""
   for _, pattern in ipairs(root_patterns) do
     if string.find(string.lower(file_info.jobname), string.lower(pattern), 1) ~= nil then
