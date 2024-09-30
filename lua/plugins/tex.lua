@@ -20,6 +20,10 @@ local function GetOutputDir(file_info)
   return result
 end
 
+-- Associate required treesitter parsers: running into errors when typing anything in an sty file.
+vim.treesitter.language.register("latex", { "tex", "sty" })
+vim.treesitter.language.register("markdown", { "text" })
+
 return {
   {
     "lervag/vimtex",
