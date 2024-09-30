@@ -72,8 +72,131 @@ local function setTextCaseMappings()
   return mappings
 end
 
+local cmp_buffers = {
+  name = "buffer",
+  group_index = 1,
+  option = {
+    get_bufnrs = function()
+      local bufs = vim.api.nvim_list_bufs()
+      --- @type integer[]
+      local new_bufs = {}
+
+      ---Check if the buffer is valid
+      ---@param bufnr number
+      ---@return number | nil
+      local function valid_bufnr(bufnr)
+        if vim.api.nvim_buf_get_name(bufnr) == "" then
+          return
+        end
+
+        local ignore_patterns = { "out", "pygtex", "gz", "fdb_latexmk", "fls", "aux", "log" }
+
+        -- local filename = vim.fn.bufname(bufnr)
+        local filename = vim.api.nvim_buf_get_name(bufnr)
+        local extension = vim.fn.fnamemodify(filename, ":e")
+        if extension == "" or extension == nil then
+          return
+        end
+        for _, pattern in ipairs(ignore_patterns) do
+          if string.find(string.lower(extension), pattern, 1) == nil then
+            return bufnr
+          end
+        end
+      end
+
+      for _, bufnr in pairs(bufs) do
+        local num = valid_bufnr(bufnr)
+        if num ~= nil then
+          new_bufs[#new_bufs + 1] = num
+        end
+      end
+
+      return new_bufs
+    end,
+  },
+}
+
 return {
   "tpope/vim-sleuth",
+  {
+    "nvim-cmp",
+    dependencies = {
+      "micangl/cmp-vimtex",
+    },
+    opts = function(_, opts)
+      opts.sources = {
+        { name = "nvim_lsp" },
+        { name = "path" },
+        cmp_buffers,
+      }
+      return opts
+    end,
+  },
+  {
+    "nvim-cmp",
+    opts = function(_, opts)
+      local cmp = require("cmp")
+
+      opts.window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      }
+
+      opts.matching = {
+        disallow_fuzzy_matching = false,
+      }
+
+      opts.mapping = {
+        ["<CR>"] = nil,
+        ["<S-CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<S-Space>"] = cmp.mapping.abort(),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
+      }
+
+      opts.formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, item)
+          item.abbr = string.sub(item.abbr, 1, 50)
+          local icons = require("lazyvim.config").icons.kinds
+          if icons[item.kind] then
+            local icon = icons[item.kind]
+            local menu = item.kind
+            local origMenu = item.menu
+            item.menu = "    (" .. (menu or "") .. ")"
+            if entry.source.name == "vimtex" then
+              ---@param menuString string
+              ---@return string
+              local removePackage = function(menuString)
+                local newString = menuString:gsub("%b[]%s*", "")
+                return newString
+              end
+              item.menu = item.menu .. removePackage(origMenu)
+            end
+            item.kind = icon .. "│"
+          end
+
+          local widths = {
+            abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+            menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+          }
+
+          for key, width in pairs(widths) do
+            if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+              item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+            end
+          end
+
+          return item
+        end,
+      }
+    end,
+  },
   {
     "L3MON4D3/LuaSnip",
     opts = function(_, opts)
@@ -108,7 +231,7 @@ return {
               require("luasnip").lsp_expand(args.body)
             end,
           }
-          table.insert(opts.sources, { name = "luasnip" })
+          table.insert(opts.sources, 3, { name = "luasnip" })
         end,
       },
     },
@@ -128,106 +251,6 @@ return {
         mode = "i",
       },
     },
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "micangl/cmp-vimtex",
-      "saadparwaiz1/cmp_luasnip",
-    },
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      }
-      opts.matching = {
-        disallow_fuzzy_matching = false,
-      }
-      opts.sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "path" },
-        {
-          name = "vimtex",
-          -- option = {
-          --   additional_information = {
-          --     info_in_menu = false,
-          --   },
-          -- },
-        },
-        { name = "luasnip" },
-        {
-          name = "buffer",
-          option = {
-            get_bufnrs = function()
-              local bufs = vim.api.nvim_list_bufs()
-              --- @type integer[]
-              local new_bufs = {}
-
-              ---Check if the buffer is valid
-              ---@param bufnr number
-              ---@return number | nil
-              local function valid_bufnr(bufnr)
-                if vim.api.nvim_buf_get_name(bufnr) == "" then
-                  return
-                end
-
-                local ignore_patterns = { "out", "pygtex", "gz", "fdb_latexmk", "fls", "aux", "log" }
-
-                -- local filename = vim.fn.bufname(bufnr)
-                local filename = vim.api.nvim_buf_get_name(bufnr)
-                local extension = vim.fn.fnamemodify(filename, ":e")
-                if extension == "" or extension == nil then
-                  return
-                end
-                for _, pattern in ipairs(ignore_patterns) do
-                  if string.find(string.lower(extension), pattern, 1) == nil then
-                    return bufnr
-                  end
-                end
-              end
-
-              for _, bufnr in pairs(bufs) do
-                local num = valid_bufnr(bufnr)
-                if num ~= nil then
-                  new_bufs[#new_bufs + 1] = num
-                end
-              end
-
-              return new_bufs
-            end,
-          },
-        },
-      })
-      opts.mapping["<CR>"] = nil
-      opts.mapping["<S-CR>"] = cmp.mapping.confirm({ select = true })
-      opts.mapping["<C-CR>"] = cmp.mapping.confirm({ select = true })
-      opts.mapping["<S-Space>"] = cmp.mapping.abort()
-      opts.formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, item)
-          item.abbr = string.sub(item.abbr, 1, 50)
-          local icons = require("lazyvim.config").icons.kinds
-          if icons[item.kind] then
-            local icon = icons[item.kind]
-            local menu = item.kind
-            local origMenu = item.menu
-            item.menu = "    (" .. (menu or "") .. ")"
-            if entry.source.name == "vimtex" then
-              ---@param menuString string
-              ---@return string
-              local removePackage = function(menuString)
-                local newString = menuString:gsub("%b[]%s*", "")
-                return newString
-              end
-              item.menu = item.menu .. removePackage(origMenu)
-            end
-            item.kind = icon .. "│"
-          end
-          return item
-        end,
-      }
-    end,
   },
   {
     "kawre/neotab.nvim",
