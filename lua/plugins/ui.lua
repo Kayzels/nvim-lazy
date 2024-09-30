@@ -272,7 +272,7 @@ return {
       }
       opts.render = require("functions.bars").inclineRender
       opts.ignore = {
-        buftypes = function(bufnr, buftype)
+        buftypes = function(_, buftype)
           if (buftype == "") or (buftype == "help") then
             return false
           end
@@ -283,7 +283,18 @@ return {
         unlisted_buffers = false,
       }
     end,
-    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>uv",
+        function()
+          -- Requires being called twice the first time, but better cuz of the loading time.
+          require("incline").toggle()
+        end,
+        "Toggle Incline",
+      },
+    },
+    -- event = "VeryLazy",
+    lazy = true,
   },
   {
     "echasnovski/mini.hipatterns",

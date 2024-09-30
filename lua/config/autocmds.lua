@@ -43,10 +43,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     --     theme = auto,
     --   },
     -- })
-    -- NOTE: Needed, because otherwise it weirdly inverts some colors
-    require("incline").setup({
-      render = require("functions.bars").inclineRender,
-    })
+
+    if package.loaded["incline"] then
+      -- NOTE: Needed, because otherwise it weirdly inverts some colors
+      require("incline").setup({
+        render = require("functions.bars").inclineRender,
+      })
+    end
 
     -- The component for plugin updates and recording messages doesn't update
     -- automatically, so force this update.
