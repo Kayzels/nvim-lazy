@@ -71,8 +71,6 @@ return {
       -- because LazyVim config clears messages
       require("noice").setup(opts)
     end,
-    -- NOTE: Using this version due to weird cursor jumping on latest
-    version = "4.4.7",
     opts = {
       presets = {
         lsp_doc_border = true,
@@ -95,26 +93,6 @@ return {
           ["cmp.entry.get_documentation"] = true,
         },
       },
-      markdown = {
-        highlights = {
-          -- ["|%S-|"] = "@text.reference",
-          ["|%S-|"] = "@property",
-          ["@%S+"] = "@parameter",
-          ["*%S+*"] = "@text.property",
-          ["^%s*- %S+"] = "@text.property",
-          ["^%s*(Parameters:)"] = "@text.title",
-          ["^%s*(Args:)"] = "@text.title",
-          ["^%s*(Attributes:)"] = "@text.title",
-          ["^%s*(Example:)"] = "@text.title",
-          ["^%s*(Return:)"] = "@text.title",
-          ["^%s*(Raises:)"] = "@text.title",
-          ["^%s*(Returns:)"] = "@text.title",
-          ["^%s*(See also:)"] = "@text.title",
-          ["{%S-}"] = "@parameter",
-          -- ["\\*\\*(%S+)\\*\\*"] = "@property",
-        },
-      },
-      -- **text that should be bold**
     },
   },
   {
