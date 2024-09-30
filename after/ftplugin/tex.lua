@@ -94,3 +94,15 @@ mp.map_buf(0, "i", "$", { action = "closeopen", pair = "$$" })
 
 -- Change timeoutlen when opening tex file, otherwise can't type captial Vimtex imaps fast enough
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 400
+
+local cmp = require("cmp")
+local sources = cmp.get_config().sources
+for i = #sources, 1, -1 do
+  if sources ~= nil and sources[i].name == "latex_symbols" then
+    table.remove(sources, i)
+  end
+end
+if sources ~= nil then
+  table.insert(sources, 4, { name = "vimtex" })
+end
+cmp.setup.buffer({ sources = sources })

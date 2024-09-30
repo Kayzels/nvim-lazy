@@ -409,4 +409,11 @@ return {
       require("mini.pairs").setup(opts)
     end,
   },
+  {
+    "nvim-cmp",
+    dependencies = { "kdheepak/cmp-latex-symbols" },
+    opts = function(_, opts)
+      table.insert(opts.sources, 4, { name = "latex_symbols" })
+    end,
+  },
 }
