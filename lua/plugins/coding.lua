@@ -309,10 +309,6 @@ return {
     vscode = true,
   },
   {
-    "b0o/SchemaStore.nvim",
-    version = false,
-  },
-  {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = true,
