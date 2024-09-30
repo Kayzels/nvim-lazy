@@ -142,6 +142,7 @@ end
 --- @param trunc_width number trunctates component when screen width is less then trunc_width
 --- @param trunc_len number truncates component to trunc_len number of chars
 --- @param hide_width number hides component when window width is smaller then hide_width
+--- @return fun(str: string): string
 --- return function that can format the component accordingly
 function M.trunc(trunc_width, trunc_len, hide_width)
   --- @param str string
@@ -168,25 +169,6 @@ function M.trunc(trunc_width, trunc_len, hide_width)
       end
       local final = str:sub(1, dot_index - 1)
       return final
-    end
-    return str
-  end
-end
-
---- @param trunc_width number trunctates component when screen width is less then trunc_width
---- @param trunc_len number truncates component to trunc_len number of chars
---- @param hide_width number hides component when window width is smaller then hide_width
---- @param no_ellipsis boolean whether to disable adding '...' at end after truncation
---- return function that can format the component accordingly
-function M.lualineTrunc(trunc_width, trunc_len, hide_width, no_ellipsis)
-  return function(str)
-    local win_width = vim.fn.winwidth(0)
-    if hide_width and win_width < hide_width then
-      return ""
-    elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
-      -- vim.print("Matched shortening requirement")
-      vim.print(str:sub(1, trunc_len) .. (no_ellipsis and "" or "..."))
-      return str:sub(1, trunc_len) .. (no_ellipsis and "" or "...")
     end
     return str
   end
