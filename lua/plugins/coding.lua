@@ -320,19 +320,6 @@ return {
     },
   },
   {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        { "<localleader>ct", group = "tools (CPP)" },
-      },
-    },
-    -- opts = {
-    --   defaults = {
-    --     ["<leader>ct"] = { name = "+tools (CPP)" },
-    --   },
-    -- },
-  },
-  {
     "JoosepAlviste/nvim-ts-context-commentstring",
     opts = {
       config = {
