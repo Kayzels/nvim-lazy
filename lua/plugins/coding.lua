@@ -300,15 +300,6 @@ return {
     },
   },
   {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
-    end,
-    vscode = true,
-  },
-  {
     "Badhi/nvim-treesitter-cpp-tools",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = true,
