@@ -4,13 +4,8 @@ local M = {}
 ---@param active boolean
 ---@return fun() : string
 function M.getModeColor(active)
-  ---@type string
-  local lualine_index
-  if active then
-    lualine_index = "a"
-  else
-    lualine_index = "b"
-  end
+  local lualine_index = active and "a" or "b"
+
   ---@return string
   return function()
     local suffix = require("lualine.highlight").get_mode_suffix()
@@ -65,8 +60,7 @@ end
 --- Only real difference is adding the dot between components,
 --- no easy way to do that with existing code.
 ---@param _lines TextSegment[][]
----@param hl_group string
-local function troubleComponents(_lines, hl_group)
+local function troubleComponents(_lines)
   local lines = {} ---@type string[]
   for _, line in ipairs(_lines) do
     local parts = {}
@@ -82,9 +76,6 @@ local function troubleComponents(_lines, hl_group)
     end
   end
   local result = table.concat(lines, " • ")
-  -- if hl_group then
-  --   result = require("trouble.config.highlights").fix_statusline(result, hl_group)
-  -- end
   return result
 end
 
@@ -129,7 +120,7 @@ function M.troubleStatusLine(opts)
       end
       renderer:clear()
       renderer:sections({ section })
-      status = troubleComponents(renderer._lines, opts.hl_group)
+      status = troubleComponents(renderer._lines)
       return status
     end,
   }
@@ -151,9 +142,8 @@ end
 --- @param trunc_width number trunctates component when screen width is less then trunc_width
 --- @param trunc_len number truncates component to trunc_len number of chars
 --- @param hide_width number hides component when window width is smaller then hide_width
---- @param no_ellipsis boolean whether to disable adding '...' at end after truncation
 --- return function that can format the component accordingly
-function M.trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
+function M.trunc(trunc_width, trunc_len, hide_width)
   --- @param str string
   return function(str)
     local win_width = vim.fn.winwidth(0)
