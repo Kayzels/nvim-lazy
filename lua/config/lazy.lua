@@ -51,3 +51,10 @@ require("lazy").setup({
     backdrop = 100,
   },
 })
+
+-- Setup treesitter parsers after Lazy is loaded.
+-- Seems like Noice is uncertain about parsers in popups,
+-- so declare some explicitly.
+vim.treesitter.language.register("latex", { "tex", "sty" })
+vim.treesitter.language.register("markdown", { "text" })
+vim.treesitter.language.register("powershell", { "PowerShell", "ps1" })
