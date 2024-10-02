@@ -23,9 +23,9 @@ local function setPowershell()
     vim.opt.shell = "pwsh"
   end
   vim.opt.shellcmdflag =
-    "-NoLogo -ExecutionPolicy RemoteSigned -NonInteractive -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"
+    "-NoLogo -ExecutionPolicy RemoteSigned -NonInteractive -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.Formatting.Error = '';$PSStyle.Formatting.ErrorAccent='';$PSStyle.Formatting.Warning='';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
   vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-  vim.opt.shellpipe = '2>&1 | %%{ "$_" } | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+  vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
   vim.opt.shellquote = ""
   vim.opt.shellxquote = ""
 end
