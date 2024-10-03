@@ -130,6 +130,8 @@ return {
           -- to distinguish comments from code.
           -- Not sure how to access opts table, so setting style here as well.
           Comment = { fg = colors.overlay0, style = { "italic" } },
+          YankyPut = { link = "Search" },
+          YankyYanked = { link = "IncSearch" },
         }
       end,
       integrations = {
