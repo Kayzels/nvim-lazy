@@ -15,7 +15,7 @@ local cmp_buffers = {
       ---@param bufnr number
       ---@return number | nil
       local function valid_bufnr(bufnr)
-        if vim.api.nvim_buf_get_name(bufnr) == "" then
+        if vim.api.nvim_buf_get_name(bufnr) == "" or not vim.api.nvim_buf_is_loaded(bufnr) then
           return
         end
 
