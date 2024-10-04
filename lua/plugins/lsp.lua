@@ -90,7 +90,7 @@ return {
           settings = {
             texlab = {
               diagnostics = {
-                ignoredPatterns = { "Underfull", "Overfull", "You have requested" },
+                ignoredPatterns = { "Underfull", "Overfull", "You have requested", "dynindent" },
               },
               experimental = {
                 labelReferenceCommands = { "nameref" },

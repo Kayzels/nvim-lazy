@@ -41,6 +41,7 @@ return {
         "Overfull",
         "Underfull",
         "You have requested",
+        "dynindent",
       }
       vim.g.vimtex_syntax_custom_cmds = {
         {
