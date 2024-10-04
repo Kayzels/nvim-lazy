@@ -279,7 +279,7 @@ return {
   {
     "b0o/incline.nvim",
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
       "nvim-lualine/lualine.nvim",
     },
     opts = function(_, opts)

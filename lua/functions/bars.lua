@@ -21,14 +21,14 @@ end
 ---@return table
 function M.inclineRender(props)
   local lualine_highlight = require("lualine.highlight")
-  local devicons = require("nvim-web-devicons")
+  local icons = require("mini.icons")
   local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
   -- vim.print("Filename for incline is " .. filename)
   local ft_icon = ""
   if filename == "" then
     filename = "[No Name]"
   else
-    ft_icon = devicons.get_icon(filename)
+    ft_icon = icons.get("extension", filename)
     if ft_icon == nil then
       ft_icon = ""
     end
