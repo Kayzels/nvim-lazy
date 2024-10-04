@@ -1,10 +1,6 @@
 local M = {}
 
-table.unpack = unpack
-
-local function clone(org)
-  return { table.unpack(org) }
-end
+local clone = require("functions.util").clone
 
 local cmp_buffers = {
   name = "buffer",
