@@ -244,6 +244,23 @@ return {
           fmt = require("functions.bars").trunc(250, 80, 150),
         })
       end
+
+      --- Override Lualine lazy extension to add rounded separator at start
+      local lualine_lazy = require("lualine.extensions.lazy")
+      if lualine_lazy ~= "" then
+        table.remove(opts.extensions, 2)
+
+        lualine_lazy.sections.lualine_a = nil
+        lualine_lazy.sections.lualine_a = {
+          {
+            function()
+              return "lazy 💤"
+            end,
+            separator = { left = "" },
+          },
+        }
+        opts.extensions[2] = lualine_lazy
+      end
     end,
   },
   {
