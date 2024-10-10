@@ -10,7 +10,6 @@ local function _setScheme(mode, opts)
     vim.cmd.colorscheme(dark_theme)
   else
     vim.cmd.colorscheme(light_theme)
-    vim.cmd("Catppuccin latte")
   end
   if opts ~= nil and opts.update then
     local cmd = "Set-ColorMode " .. mode
@@ -18,15 +17,21 @@ local function _setScheme(mode, opts)
   end
 end
 
+---Sets the color scheme based on variable in custom file (changed with sed).
+---Done this way to avoid needing to call nvim with a cmd.
 function M.setColorScheme()
-  local background = vim.opt.background:get()
-  if background ~= "light" and background ~= "dark" then
-    return
+  local background = require("config.colormode").colormode
+  local call_update = false
+  -- Do a nil check in case the variable isn't defined or the file doesn't exist
+  if background == nil or (background ~= "dark" and background ~= "light") then
+    background = "dark"
+    call_update = true
   end
-  _setScheme(background)
+  _setScheme(background, { update = call_update })
 end
 
 function M.toggleLight()
+  ---@type "light" | "dark"
   local background = vim.opt.background:get()
   if background ~= "light" and background ~= "dark" then
     return

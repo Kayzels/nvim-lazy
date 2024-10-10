@@ -52,7 +52,7 @@ return {
           bg = c.bg_highlight,
         }
         hl.Folded = {
-          bg = c.bg_statusline,
+          bg = c.bg_dark,
         }
         hl.NeoTreeDimText = {
           fg = neotree_dim,
@@ -93,12 +93,10 @@ return {
     },
   },
   {
-    "https://github.com/catppuccin/nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     -- Set high priority so that it shows in Telescope colorscheme list
     priority = 1000,
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
-    end,
     opts = {
       flavour = "latte",
       transparent_background = true,
@@ -135,20 +133,11 @@ return {
         }
       end,
       integrations = {
-        cmp = true,
-        dashboard = true,
-        flash = true,
-        gitsigns = true,
-        leap = true,
         mini = {
           enabled = true,
           indentscope_color = "sky",
         },
-        noice = true,
-        notify = true,
-        telescope = true,
-        treesitter = true,
-        -- which_key = true,
+        which_key = false,
       },
     },
   },
