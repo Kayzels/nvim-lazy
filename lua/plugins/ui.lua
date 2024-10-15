@@ -282,13 +282,13 @@ return {
       "echasnovski/mini.icons",
       "nvim-lualine/lualine.nvim",
     },
-    opts = function(_, opts)
-      opts.window = {
+    opts = {
+      window = {
         padding = 0,
         margin = { horizontal = 0, vertical = 0 },
-      }
-      opts.render = require("functions.bars").inclineRender
-      opts.ignore = {
+      },
+      render = require("functions.bars").inclineRender,
+      ignore = {
         buftypes = function(_, buftype)
           if (buftype == "") or (buftype == "help") then
             return false
@@ -298,19 +298,19 @@ return {
         -- wintypes = { "autocmd", "command", "loclist", "preview", "quickfix" },
         filetypes = { "dashboard", "TelescopePrompt", "noice" },
         unlisted_buffers = false,
-      }
-    end,
-    keys = {
-      {
-        "<leader>uv",
-        function()
-          -- Requires being called twice the first time, but better cuz of the loading time.
-          require("incline").toggle()
-        end,
-        "Toggle Incline",
       },
     },
-    -- event = "VeryLazy",
+    config = function(_, opts)
+      require("incline").setup(opts)
+      LazyVim.toggle.map("<leader>uv", {
+        name = "Incline",
+        get = require("incline").is_enabled,
+        set = function(_)
+          require("incline").toggle()
+        end,
+      })
+    end,
+    event = "VeryLazy",
     lazy = true,
   },
   {
