@@ -1,5 +1,8 @@
 local M = {}
 
+M.currentMode = require("config.colormode").colormode
+M.useBack = require("config.colormode").useBack
+
 ---@param mode "light" | "dark"
 ---@param opts? { update: boolean? }
 local function _setScheme(mode, opts)
@@ -15,6 +18,7 @@ local function _setScheme(mode, opts)
     local cmd = "Set-ColorMode " .. mode
     vim.fn.system(cmd)
   end
+  M.currentMode = mode
 end
 
 ---Sets the color scheme based on variable in custom file (changed with sed).
@@ -43,6 +47,7 @@ end
 
 function M.toggleBackgroundImage()
   vim.fn.system("Switch-UseBack")
+  M.useBack = not M.useBack
 end
 
 return M
