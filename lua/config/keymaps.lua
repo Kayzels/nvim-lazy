@@ -20,6 +20,12 @@ vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
 vim.keymap.del("n", "<leader>ub")
 vim.keymap.set("n", "<leader>ub", "<cmd>ToggleLight<cr>", { desc = "Toggle Light Mode" })
 
+LazyVim.toggle.map("<leader>ux", {
+  name = "LTex",
+  get = require("functions.lsp").getLtex,
+  set = require("functions.lsp").setLtex,
+})
+
 -- Yank line on `dd` only if not empty
 vim.keymap.set("n", "dd", function()
   if vim.fn.getline("."):match("^%s*$") then
