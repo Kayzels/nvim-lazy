@@ -60,7 +60,6 @@ return {
         { "<C-Z>", desc = "which_key_ignore" },
         { ",", desc = "Repeat find character backwards" },
         { ";", desc = "Repeat find character forwards" },
-        { "<leader>ub", desc = "Toggle Dark/Light" },
       },
     },
   },

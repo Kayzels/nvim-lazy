@@ -18,7 +18,29 @@ vim.keymap.set("n", "U", "<cmd>redo<cr>", { silent = true, desc = "Redo" })
 vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
 
 vim.keymap.del("n", "<leader>ub")
-vim.keymap.set("n", "<leader>ub", "<cmd>ToggleLight<cr>", { desc = "Toggle Light Mode" })
+local wk = require("which-key")
+wk.add({ "<leader>ub", hidden = true })
+LazyVim.toggle.map("<leader>ub", {
+  name = "Light Mode",
+  get = function()
+    local mode = require("functions.theme").currentMode
+    return mode == "light"
+  end,
+  set = function(_)
+    require("functions.theme").toggleLight()
+    -- toggleLight()
+  end,
+})
+
+LazyVim.toggle.map("<leader>uB", {
+  name = "Background Image",
+  get = function()
+    return require("functions.theme").useBack
+  end,
+  set = function(_)
+    require("functions.theme").toggleBackgroundImage()
+  end,
+})
 
 LazyVim.toggle.map("<leader>ux", {
   name = "LTex",
