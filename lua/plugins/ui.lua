@@ -160,11 +160,11 @@ return {
           cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
           color = LazyVim.ui.fg("Debug"),
         },
-        {
-          require("lazy.status").updates,
-          cond = require("lazy.status").has_updates,
-          color = LazyVim.ui.fg("Special"),
-        },
+        -- {
+        --   require("lazy.status").updates,
+        --   cond = require("lazy.status").has_updates,
+        --   color = LazyVim.ui.fg("Special"),
+        -- },
         {
           "diff",
           symbols = {
