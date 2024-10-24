@@ -89,6 +89,11 @@ return {
         }
         hl["lualine_c_normal"] = "NONE"
         hl["lualine_c_inactive"] = "NONE"
+        hl["@markup.strong"] = {
+          bold = true,
+          fg = c.green,
+        }
+        hl.TelescopeSelection = hl.Visual
       end,
     },
   },
@@ -114,7 +119,7 @@ return {
         functions = { "bold" },
       },
       custom_highlights = function(colors)
-        return {
+        local groups = {
           texCConceptArg = { fg = colors.sky, style = { "bold" } },
           -- texCConceptArg = { fg = colors.maroon, style = { "bold" } },
           texItemLabelConcealed = { link = "texCConceptArg" },
@@ -131,6 +136,22 @@ return {
           YankyPut = { link = "Search" },
           YankyYanked = { link = "IncSearch" },
         }
+        local darken = require("catppuccin.utils.colors").darken
+        local rainbow = {
+          colors.red,
+          colors.peach,
+          colors.yellow,
+          colors.green,
+          colors.sapphire,
+          colors.lavender,
+        }
+        for i = 1, 6 do
+          local color = rainbow[i]
+          groups["RenderMarkdownH" .. i] = { fg = color, style = { "bold" } }
+          -- groups["RenderMarkdownH" .. i .. "Bg"] = { bg = darken(color, 0.10, colors.base) }
+          groups["RenderMarkdownH" .. i .. "Bg"] = { bg = darken(color, 0.10, colors.mantle) }
+        end
+        return groups
       end,
       integrations = {
         mini = {
@@ -138,6 +159,7 @@ return {
           indentscope_color = "sky",
         },
         which_key = false,
+        render_markdown = false,
       },
     },
   },
