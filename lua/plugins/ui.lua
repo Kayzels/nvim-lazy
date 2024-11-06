@@ -101,7 +101,6 @@ return {
     },
     opts = function(_, opts)
       local icons = require("lazyvim.config").icons
-      vim.opt.showtabline = 1
 
       opts.options = {
         theme = "auto",
@@ -112,6 +111,7 @@ return {
           winbar = { "neo-tree", "dashboard" },
           statusline = { "dashboard" },
         },
+        always_show_tabline = false,
       }
 
       opts.sections["lualine_a"] = {
@@ -225,23 +225,58 @@ return {
         },
       }
 
+      ---Create winbar component for filename
+      ---@param active boolean
+      ---@return table
+      local function createFnameBar(active)
+        local color = require("functions.bars").getModeColor(active)
+        local values = {
+          {
+            "filetype",
+            icon_only = true,
+            separator = { left = "", right = "" },
+            padding = { left = 1, right = 0 },
+            colored = false,
+            color = color,
+          },
+          {
+            "filename",
+            file_status = true,
+            path = 0,
+            symbols = {
+              modified = "●",
+              readonly = "󰌾",
+            },
+            separator = { left = "", right = "" },
+            color = color,
+          },
+        }
+        return values
+      end
+
+      opts.winbar = {}
+      opts.inactive_winbar = {}
+      opts.winbar.lualine_a = createFnameBar(true)
+      opts.inactive_winbar.lualine_b = createFnameBar(false)
+
       if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
-        -- Get trouble symbols here, before setting sections
-        local symbols = require("functions.bars").troubleStatusLine({
+        local trouble = require("trouble")
+        local symbols = trouble.statusline({
           mode = "symbols",
           groups = {},
           title = false,
           filter = { range = true },
-          format = "{kind_icon}{symbol.name}",
+          format = "{kind_icon}{symbol.name:Normal}",
           hl_group = "lualine_c_normal",
         })
-        table.insert(opts.sections.lualine_c, {
-          symbols and symbols.get,
-          cond = function()
-            return vim.b.trouble_lualine ~= false and symbols.has()
-          end,
-          fmt = require("functions.bars").trunc(250, 80, 150),
-        })
+        opts.winbar.lualine_c = {
+          {
+            symbols and symbols.get,
+            cond = function()
+              return vim.b.trouble_lualine ~= false and symbols.has()
+            end,
+          },
+        }
       end
 
       --- Override Lualine lazy extension to add rounded separator at start
@@ -274,43 +309,6 @@ return {
         },
       },
     },
-  },
-  {
-    "b0o/incline.nvim",
-    dependencies = {
-      "echasnovski/mini.icons",
-      "nvim-lualine/lualine.nvim",
-    },
-    opts = {
-      window = {
-        padding = 0,
-        margin = { horizontal = 0, vertical = 0 },
-      },
-      render = require("functions.bars").inclineRender,
-      ignore = {
-        buftypes = function(_, buftype)
-          if (buftype == "") or (buftype == "help") then
-            return false
-          end
-          return true
-        end,
-        -- wintypes = { "autocmd", "command", "loclist", "preview", "quickfix" },
-        filetypes = { "dashboard", "TelescopePrompt", "noice" },
-        unlisted_buffers = false,
-      },
-    },
-    config = function(_, opts)
-      require("incline").setup(opts)
-      LazyVim.toggle.map("<leader>uv", {
-        name = "Incline",
-        get = require("incline").is_enabled,
-        set = function(_)
-          require("incline").toggle()
-        end,
-      })
-    end,
-    event = "VeryLazy",
-    lazy = true,
   },
   {
     "echasnovski/mini.hipatterns",

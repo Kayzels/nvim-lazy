@@ -94,6 +94,7 @@ return {
           fg = c.green,
         }
         hl.TelescopeSelection = hl.Visual
+        hl.TabLineFill = "NONE"
       end,
     },
   },
