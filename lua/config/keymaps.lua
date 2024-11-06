@@ -55,3 +55,6 @@ vim.keymap.set("n", "dd", function()
   end
   return "dd"
 end, { expr = true })
+
+-- Stop going to new line if enter pressed at end of command (example with <C-S> for save)
+vim.keymap.set("n", "<CR>", "<Nop>")
