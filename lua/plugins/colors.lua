@@ -165,6 +165,14 @@ return {
     },
   },
   {
+    "folke/snacks.nvim",
+    opts = {
+      lazygit = {
+        configure = false,
+      },
+    },
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = require("functions.theme").setColorScheme,
