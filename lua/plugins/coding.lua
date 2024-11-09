@@ -354,7 +354,7 @@ return {
     "echasnovski/mini.pairs",
     --- NOTE: Calling config explicitly, because LazyVim overrides the minipairs open method.
     config = function(_, opts)
-      LazyVim.toggle.map("<leader>up", {
+      Snacks.toggle({
         name = "Mini Pairs",
         get = function()
           return not vim.g.minipairs_disable
@@ -362,7 +362,7 @@ return {
         set = function(state)
           vim.g.minipairs_disable = not state
         end,
-      })
+      }):map("<leader>up")
       require("mini.pairs").setup(opts)
     end,
   },

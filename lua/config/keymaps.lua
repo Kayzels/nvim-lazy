@@ -20,7 +20,8 @@ vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
 vim.keymap.del("n", "<leader>ub")
 local wk = require("which-key")
 wk.add({ "<leader>ub", hidden = true })
-LazyVim.toggle.map("<leader>ub", {
+
+Snacks.toggle({
   name = "Light Mode",
   get = function()
     local mode = require("functions.theme").currentMode
@@ -30,9 +31,9 @@ LazyVim.toggle.map("<leader>ub", {
     require("functions.theme").toggleLight()
     -- toggleLight()
   end,
-})
+}):map("<leader>ub")
 
-LazyVim.toggle.map("<leader>uB", {
+Snacks.toggle({
   name = "Background Image",
   get = function()
     return require("functions.theme").useBack
@@ -40,13 +41,13 @@ LazyVim.toggle.map("<leader>uB", {
   set = function(_)
     require("functions.theme").toggleBackgroundImage()
   end,
-})
+}):map("<leader>uB")
 
-LazyVim.toggle.map("<leader>ux", {
+Snacks.toggle({
   name = "LTex",
   get = require("functions.lsp").getLtex,
   set = require("functions.lsp").setLtex,
-})
+}):map("<leader>ux")
 
 -- Yank line on `dd` only if not empty
 vim.keymap.set("n", "dd", function()
