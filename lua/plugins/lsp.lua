@@ -136,7 +136,10 @@ return {
         end,
       },
     },
-    init = function()
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = { "<c-k>", false, mode = "i" }
       -- keys[#keys + 1] = { "<c-i>", vim.lsp.buf.signature_help, mode = "i" }
@@ -146,6 +149,10 @@ return {
       keys[#keys + 1] = { "[[", false }
       -- stylua: ignore
       keys[#keys + 1] = { "[r", function() LazyVim.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight", desc = "Prev Reference" }
+      -- stylua: ignore
+      keys[#keys + 1] = { "K", function() vim.lsp.buf.hover() end, "Hover" }
+      -- stylua: ignore
+      keys[#keys + 1] = { "gK", function() vim.lsp.buf.signature_help() end, "Signature Help" }
     end,
   },
   {
