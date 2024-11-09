@@ -49,6 +49,19 @@ Snacks.toggle({
   set = require("functions.lsp").setLtex,
 }):map("<leader>ux")
 
+Snacks:toggle({
+  name = "Winbar",
+  get = function()
+    return #(vim.opt.winbar:get()) > 0
+  end,
+  set = function(state)
+    require("lualine").hide({
+      place = { "winbar" },
+      unhide = state,
+    })
+  end,
+}):map("<leader>uv")
+
 -- Yank line on `dd` only if not empty
 vim.keymap.set("n", "dd", function()
   if vim.fn.getline("."):match("^%s*$") then
