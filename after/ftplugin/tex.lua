@@ -94,3 +94,6 @@ mp.map_buf(0, "i", "$", { action = "closeopen", pair = "$$" })
 
 -- Change timeoutlen when opening tex file, otherwise can't type captial Vimtex imaps fast enough
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 400
+
+vim.opt_local.foldmethod = "expr"
+vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
