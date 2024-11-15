@@ -35,15 +35,6 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   command = "set guicursor=a:ver25-blinkwait700-blinkoff400-blinkon250",
 })
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    -- The component for plugin updates and recording messages doesn't update
-    -- automatically, so force this update.
-    require("functions.bars").updateLualineSectionX()
-    vim.opt.showtabline = 1
-  end,
-})
-
 -- Disable minipairs completing `` in some files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "tex" },
