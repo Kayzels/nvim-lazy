@@ -15,24 +15,31 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
-vim.g.python3_host_prog = "C:\\Users\\Kyzan\\Tools\\nvim-venv\\Scripts\\python.exe"
+local uname = vim.uv.os_uname()
+local currentOS = uname.sysname
+local isWin = currentOS:lower():find("windows") and true or false
+local isLinux = currentOS:lower():find("linux") and true or false
+local isWSL = isLinux and (uname.version:lower():find("microsoft") and true or false)
 
-local function setPowershell()
-  vim.opt.shell = "powershell"
-  if vim.fn.executable("pwsh") then
-    vim.opt.shell = "pwsh"
-  end
-  vim.opt.shellcmdflag =
-    "-NoLogo -ExecutionPolicy RemoteSigned -NonInteractive -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.Formatting.Error = '';$PSStyle.Formatting.ErrorAccent='';$PSStyle.Formatting.Warning='';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
-  vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-  vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-  vim.opt.shellquote = ""
-  vim.opt.shellxquote = ""
+if isWin then
+  vim.g.python3_host_prog = "C:\\Users\\Kyzan\\Tools\\nvim-venv\\Scripts\\python.exe"
+  LazyVim.terminal.setup("pwsh")
 end
 
-setPowershell()
-
--- LazyVim.terminal.setup("pwsh")
+if isWSL then
+  _G.clipboard = {
+    name = "WslClipboard",
+    copy = {
+      ["+"] = "clip.exe",
+      ["*"] = "clip.exe",
+    },
+    paste = {
+      ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
 
 vim.opt.formatoptions = "jcroqlt"
 
