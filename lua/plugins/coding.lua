@@ -80,7 +80,6 @@ return {
     "nvim-cmp",
     dependencies = {
       "micangl/cmp-vimtex",
-      "kdheepak/cmp-latex-symbols",
     },
     opts = function(_, opts)
       local cmp = require("cmp")

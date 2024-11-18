@@ -54,7 +54,6 @@ local default_sources = {
 }
 
 local sources = clone(default_sources)
-table.insert(sources, { name = "latex_symbols" })
 M.sources = sources
 
 local tex_sources = clone(default_sources)
