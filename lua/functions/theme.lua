@@ -15,7 +15,7 @@ local function _setScheme(mode, opts)
     vim.cmd.colorscheme(light_theme)
   end
   if opts ~= nil and opts.update then
-    local cmd = "Set-ColorMode " .. mode
+    local cmd = "setc " .. mode
     vim.fn.system(cmd)
   end
   M.currentMode = mode
