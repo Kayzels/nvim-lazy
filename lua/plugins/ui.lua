@@ -184,6 +184,7 @@ return {
             end
           end,
         },
+        LazyVim.lualine.cmp_source("codeium"),
         lsp,
         { "filetype", padding = { left = 1, right = 1 }, icon = { align = "right" }, cond = conditions.hide_in_width },
       }

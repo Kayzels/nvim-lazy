@@ -50,6 +50,7 @@ local default_sources = {
   { name = "nvim_lsp" },
   { name = "path" },
   cmp_buffers,
+  { name = "codeium", priority = 100 },
   { name = "luasnip" },
 }
 
