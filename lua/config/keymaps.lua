@@ -84,6 +84,7 @@ Snacks:toggle({
     if state then
       if server_status == 2 then
         require("neocodeium.commands").restart()
+        require("neocodeium.commands").enable()
       end
     else
       require("neocodeium.commands").disable(true)
