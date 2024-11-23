@@ -48,7 +48,7 @@ local cmp_buffers = {
 
 local default_sources = {
   { name = "nvim_lsp" },
-  { name = "async_path" },
+  { name = "path" },
   cmp_buffers,
   { name = "luasnip" },
 }
