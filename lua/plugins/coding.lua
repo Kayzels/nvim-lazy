@@ -75,7 +75,7 @@ end
 -- NOTE: cmp sources are placed in a separate file, so they can be called separately.
 
 return {
-  "tpope/vim-sleuth",
+  -- "tpope/vim-sleuth",
   {
     "nvim-cmp",
     dependencies = {
