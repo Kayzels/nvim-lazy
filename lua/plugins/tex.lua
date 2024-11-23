@@ -23,6 +23,8 @@ end
 return {
   {
     "lervag/vimtex",
+    lazy = true,
+    ft = { "tex", "sty" },
     init = function()
       vim.g.vimtex_compiler_latexmk = {
         callback = 1,
