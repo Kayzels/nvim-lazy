@@ -36,6 +36,8 @@ if vim.fn.has("wsl") then
     },
     cache_enabled = 1, -- cache MUST be enabled, or else it hangs on dd/y/x and all other copy operation
   }
+
+  vim.g.python3_host_prog = "/usr/bin/python3"
 end
 
 vim.opt.formatoptions = "jcroqlt"
@@ -47,3 +49,7 @@ vim.g.lazyvim_statuscolumn = {
 
 -- Don't let LazyVim set the theme for lazygit, because it messes up Wezterm theme change
 vim.g.lazygit_config = false
+
+-- Disable perl and ruby providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
