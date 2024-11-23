@@ -139,6 +139,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = "LazyFile",
     opts = function(_, opts)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = { "<c-k>", false, mode = "i" }
