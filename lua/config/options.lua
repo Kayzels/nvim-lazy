@@ -15,31 +15,29 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
-local uname = vim.uv.os_uname()
-local currentOS = uname.sysname
-local isWin = currentOS:lower():find("windows") and true or false
-local isLinux = currentOS:lower():find("linux") and true or false
-local isWSL = isLinux and (uname.version:lower():find("microsoft") and true or false)
-
-if isWin then
+if vim.fn.has("win32") and not vim.fn.has("wsl") then
   vim.g.python3_host_prog = "C:\\Users\\Kyzan\\Tools\\nvim-venv\\Scripts\\python.exe"
   LazyVim.terminal.setup("pwsh")
 end
 
-if isWSL then
-  _G.clipboard = {
-    name = "WslClipboard",
-    copy = {
-      ["+"] = "clip.exe",
-      ["*"] = "clip.exe",
-    },
-    paste = {
-      ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 0,
-  }
-end
+vim.opt.clipboard = ""
+
+-- if vim.fn.has("wsl") then
+--   vim.g.clipboard = {
+--     name = "WslClipboard",
+--     copy = {
+--       ["+"] = "clip.exe",
+--       ["*"] = "clip.exe",
+--     },
+--     paste = {
+--       -- ["+"] = "clip.exe",
+--       -- ["*"] = "clip.exe",
+--       ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--       ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--     },
+--     cache_enabled = 0,
+--   }
+-- end
 
 vim.opt.formatoptions = "jcroqlt"
 
