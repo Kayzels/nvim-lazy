@@ -48,17 +48,12 @@ local cmp_buffers = {
 
 local default_sources = {
   { name = "nvim_lsp" },
-  { name = "path" },
+  { name = "async_path" },
   cmp_buffers,
-  { name = "codeium", priority = 100 },
   { name = "luasnip" },
 }
 
 local sources = clone(default_sources)
 M.sources = sources
-
-local tex_sources = clone(default_sources)
-table.insert(tex_sources, { name = "vimtex" })
-M.tex_sources = tex_sources
 
 return M
