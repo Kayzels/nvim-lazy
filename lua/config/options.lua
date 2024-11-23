@@ -20,24 +20,23 @@ if vim.fn.has("win32") and not vim.fn.has("wsl") then
   LazyVim.terminal.setup("pwsh")
 end
 
-vim.opt.clipboard = ""
-
--- if vim.fn.has("wsl") then
---   vim.g.clipboard = {
---     name = "WslClipboard",
---     copy = {
---       ["+"] = "clip.exe",
---       ["*"] = "clip.exe",
---     },
---     paste = {
---       -- ["+"] = "clip.exe",
---       -- ["*"] = "clip.exe",
---       ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---       ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---     },
---     cache_enabled = 0,
---   }
--- end
+if vim.fn.has("wsl") then
+  -- xclip is significantly faster than the suggestion in docs.
+  -- It requires $DISPLAY to be set,
+  -- which is done by WSL2 automatically if gui is enabled
+  vim.g.clipboard = {
+    name = "xclip-wsl",
+    copy = {
+      ["+"] = { "xclip", "-quiet", "-i", "-selection", "clipboard" },
+      ["*"] = { "xclip", "-quiet", "-i", "-selection", "primary" },
+    },
+    paste = {
+      ["+"] = { "xclip", "-o", "-selection", "clipboard" },
+      ["*"] = { "xclip", "-o", "-selection", "primary" },
+    },
+    cache_enabled = 1, -- cache MUST be enabled, or else it hangs on dd/y/x and all other copy operation
+  }
+end
 
 vim.opt.formatoptions = "jcroqlt"
 
