@@ -28,7 +28,7 @@ return {
         end,
       })
 
-      vim.keymap.set("i", "<S-CR>", function()
+      vim.keymap.set("i", "<C-CR>", function()
         neocodeium.accept()
       end)
       vim.keymap.set("i", "<A-o>", function()
@@ -46,7 +46,7 @@ return {
       vim.keymap.set("i", "<A-u>", function()
         neocodeium.accept_line()
       end)
-      vim.keymap.set("i", "<S-Space>", function()
+      vim.keymap.set("i", "<C-Space>", function()
         neocodeium.clear()
       end)
     end,
