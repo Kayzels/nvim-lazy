@@ -29,10 +29,14 @@ if not vim.g.vscode then
   })
 end
 
--- Change cursor when leaving Neovim
+-- Change cursor when leaving and entering Neovim
 vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   pattern = "*",
   command = "set guicursor=a:ver25-blinkwait700-blinkoff400-blinkon250",
+})
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
+  pattern = "*",
+  command = "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20",
 })
 
 -- Disable minipairs completing `` in some files
