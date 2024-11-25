@@ -15,7 +15,9 @@ vim.keymap.set("n", "<C-Space>", function()
   print("Ctrl Space")
 end, { desc = "which_key_ignore" })
 vim.keymap.set("n", "U", "<cmd>redo<cr>", { silent = true, desc = "Redo" })
-vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
+if vim.fn.has("win32") == 1 then
+  vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
+end
 
 vim.keymap.del("n", "<leader>ub")
 local wk = require("which-key")
