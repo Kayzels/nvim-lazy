@@ -4,7 +4,7 @@ return {
     event = { "CursorMoved", "WinScrolled" },
     opts = {
       floating = false,
-      insert_mode = true,
+      insert_mode = false,
     },
   },
   {
@@ -16,18 +16,38 @@ return {
     },
   },
   {
-    "dstein64/nvim-scrollview",
-    event = "LazyFile",
+    "lewis6991/satellite.nvim",
     opts = {
-      always_show = true,
-      current_only = true,
-      excluded_filetypes = { "snacks_dashboard", "TelescopePrompt", "Noice", "neo-tree" },
+      winblend = 0,
+      handlers = {
+        cursor = {
+          enable = true,
+          symbols = { "•" },
+        },
+        gitsigns = {
+          enable = true,
+          signs = {
+            add = "▎",
+            change = "▎",
+            delete = "",
+          },
+        },
+      },
     },
   },
-  {
-    "dstein64/nvim-scrollview",
-    opts = function(_, opts)
-      require("scrollview.contrib.gitsigns").setup()
-    end,
-  },
+  -- {
+  --   "dstein64/nvim-scrollview",
+  --   event = "LazyFile",
+  --   opts = {
+  --     -- always_show = true,
+  --     current_only = true,
+  --     excluded_filetypes = { "snacks_dashboard", "TelescopePrompt", "Noice", "neo-tree" },
+  --   },
+  -- },
+  -- {
+  --   "dstein64/nvim-scrollview",
+  --   opts = function(_, opts)
+  --     require("scrollview.contrib.gitsigns").setup()
+  --   end,
+  -- },
 }
