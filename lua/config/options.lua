@@ -15,12 +15,12 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
-if vim.fn.has("win32") and not vim.fn.has("wsl") then
+if vim.fn.has("win32") == 1 then
   vim.g.python3_host_prog = "C:\\Users\\Kyzan\\Tools\\nvim-venv\\Scripts\\python.exe"
   LazyVim.terminal.setup("pwsh")
 end
 
-if vim.fn.has("wsl") then
+if vim.fn.has("wsl") == 1 then
   -- xclip is significantly faster than the suggestion in docs.
   -- It requires $DISPLAY to be set,
   -- which is done by WSL2 automatically if gui is enabled
