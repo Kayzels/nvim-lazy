@@ -7,4 +7,12 @@ return {
       insert_mode = true,
     },
   },
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {
+      smear_between_neighbor_lines = false,
+      use_floating_windows = false,
+      legacy_computing_symbols_support = false,
+    },
+  },
 }
