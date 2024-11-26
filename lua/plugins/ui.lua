@@ -94,7 +94,10 @@ return {
     },
   },
   {
-    "folke/noice.nvim",
+    -- NOTE: To fix nightly LSP offset encoding warning, until merged
+    "tris203/noice.nvim",
+    branch = "mixed_encodings",
+    -- "folke/noice.nvim",
     config = function(_, opts)
       -- NOTE: Calling explicitly rather than using LazyVim way,
       -- because LazyVim config clears messages
