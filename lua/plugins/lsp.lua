@@ -4,7 +4,6 @@ win.default_options.border = "rounded"
 return {
   {
     "neovim/nvim-lspconfig",
-    commit = "27008519562f16453813c19dcc6ee97f505e0b1c",
     optional = true,
     opts = {
       inlay_hints = {
