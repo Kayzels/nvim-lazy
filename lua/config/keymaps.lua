@@ -51,7 +51,7 @@ Snacks.toggle({
   set = require("functions.lsp").setLtex,
 }):map("<leader>ux")
 
-Snacks:toggle({
+Snacks.toggle({
   name = "Winbar",
   get = function()
     return #(vim.opt.winbar:get()) > 0
@@ -64,7 +64,7 @@ Snacks:toggle({
   end,
 }):map("<leader>uv")
 
-Snacks:toggle({
+Snacks.toggle({
   name = "Codeium Completion",
   get = function()
     local status, _ = require("neocodeium").get_status()
@@ -75,7 +75,7 @@ Snacks:toggle({
   end,
 }):map("<leader>ua")
 
-Snacks:toggle({
+Snacks.toggle({
   name = "Codeium Server",
   get = function()
     local _, server_status = require("neocodeium").get_status()
