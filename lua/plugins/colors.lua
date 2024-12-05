@@ -173,9 +173,20 @@ return {
     },
   },
   {
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      set_dark_mode = function()
+        require("functions.theme").setMode("dark")
+      end,
+      set_light_mode = function()
+        require("functions.theme").setMode("light")
+      end,
+    },
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = require("functions.theme").setColorScheme,
+      colorscheme = require("functions.theme").setMode,
     },
   },
 }
