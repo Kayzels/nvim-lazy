@@ -84,26 +84,6 @@ return {
             },
           },
         },
-        ltex = {
-          autostart = false,
-          filetypes = {
-            "gitcommit",
-            "latex",
-            "tex",
-            "markdown",
-            "pandoc",
-            "text",
-          },
-          settings = {
-            ltex = {
-              language = "en-GB",
-              checkFrequency = "save",
-              disabledRules = {
-                ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S" },
-              },
-            },
-          },
-        },
         jsonls = {
           on_new_config = function(new_config)
             new_config.settings.json.schemas = new_config.settings.json.schemas or {}
@@ -119,21 +99,6 @@ return {
             },
           },
         },
-      },
-      setup = {
-        ltex = function()
-          vim.api.nvim_create_autocmd("LspAttach", {
-            callback = function(args)
-              local client = vim.lsp.get_client_by_id(args.data.client_id)
-              if client and client.name == "ltex" then
-                require("ltex_extra").setup({
-                  load_langs = { "en-GB" },
-                  path = ".vscode",
-                })
-              end
-            end,
-          })
-        end,
       },
     },
   },
@@ -155,9 +120,6 @@ return {
       -- stylua: ignore
       keys[#keys + 1] = { "gK", function() vim.lsp.buf.signature_help() end, "Signature Help" }
     end,
-  },
-  {
-    "barreiroleo/ltex-extra.nvim",
   },
   {
     "williamboman/mason.nvim",

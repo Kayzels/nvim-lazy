@@ -46,12 +46,6 @@ Snacks.toggle({
 }):map("<leader>uB")
 
 Snacks.toggle({
-  name = "LTex",
-  get = require("functions.lsp").getLtex,
-  set = require("functions.lsp").setLtex,
-}):map("<leader>ux")
-
-Snacks.toggle({
   name = "Winbar",
   get = function()
     return #(vim.opt.winbar:get()) > 0
