@@ -13,22 +13,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
-if not vim.g.vscode then
-  -- Change LuaSnip session logic so tab doesn't go back to previous snippet
-  vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = "*",
-    callback = function()
-      if
-        ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
-        and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-        and not require("luasnip").session.jump_active
-      then
-        require("luasnip").unlink_current()
-      end
-    end,
-  })
-end
-
 -- Change cursor when leaving and entering Neovim
 vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   pattern = "*",
@@ -43,6 +27,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "tex" },
   callback = function(event)
+    ---@diagnostic disable-next-line: missing-fields
     vim.keymap.set("i", "`", "`", { buffer = event.buf })
   end,
 })
