@@ -161,6 +161,7 @@ return {
         },
         which_key = false,
         render_markdown = false,
+        fzf = true,
       },
     },
   },

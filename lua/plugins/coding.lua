@@ -61,7 +61,6 @@ local function setTextCaseMappings()
   }
 
   local mappings = {}
-  table.insert(mappings, { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" })
   for _, def in ipairs(defs) do
     local mapping = setMapping(def)
     for _, v in ipairs(mapping) do
@@ -127,12 +126,10 @@ return {
     "johmsalas/text-case.nvim",
     vscode = true,
     dependencies = {
-      "nvim-telescope/telescope.nvim",
       "folke/which-key.nvim",
     },
     config = function(_, opts)
       require("textcase").setup(opts)
-      require("telescope").load_extension("textcase")
     end,
     opts = {
       default_keymappings_enabled = false,
@@ -140,10 +137,6 @@ return {
     keys = setTextCaseMappings,
     cmd = {
       "Subs",
-      "TextCaseOpenTelescope",
-      "TextCaseOpenTelescopeQuickChange",
-      "TextCaseOpenTelescopeLSPChange",
-      "TextCaseStartReplacingCommand",
     },
   },
   {

@@ -1,24 +1,9 @@
 return {
   {
-    "telescope.nvim",
+    "ibhagwan/fzf-lua",
     opts = {
-      defaults = {
-        file_ignore_patterns = {
-          "%.png",
-          "%.jpg",
-          "%.jpeg",
-          "%.pdf",
-          "%.pygtex",
-          "%.gz",
-          "%.fdb_latexmk",
-          "%.fls",
-          "%.aux",
-        },
-        path_display = {
-          filename_first = {
-            reverse_directories = true,
-          },
-        },
+      files = {
+        formatter = "path.filename_first",
       },
     },
   },
