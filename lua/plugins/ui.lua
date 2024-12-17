@@ -71,6 +71,7 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
+      preset = "classic",
       win = {
         border = "rounded",
         title = true,
@@ -379,6 +380,26 @@ return {
       scope = {
         enabled = true,
       },
+      scroll = {
+        enabled = false,
+      },
     },
+  },
+  {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      Snacks.config.style("news", {
+        height = 0.6,
+        width = 0.6,
+        border = "rounded",
+        wo = {
+          conceallevel = 3,
+          signcolumn = "yes",
+          spell = false,
+          statuscolumn = " ",
+          wrap = false,
+        },
+      })
+    end,
   },
 }
