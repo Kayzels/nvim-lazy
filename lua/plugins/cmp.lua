@@ -16,9 +16,6 @@ return {
         menu = {
           border = "rounded",
           winhighlight = "Normal:None,FloatBorder:BlinkCmpDocBorder,CursorLine:CursorLine,Search:None",
-          window = {
-            border = "rounded",
-          },
           draw = {
             columns = {
               { "kind_icon", "split_icon" },
