@@ -11,7 +11,10 @@ return {
       },
       completion = {
         list = {
-          selection = "auto_insert",
+          selection = {
+            preselect = true,
+            auto_insert = true,
+          },
         },
         menu = {
           border = "rounded",
