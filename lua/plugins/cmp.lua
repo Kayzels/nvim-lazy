@@ -63,6 +63,14 @@ return {
       },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
+        providers = {
+          lsp = {
+            fallbacks = {},
+          },
+          buffer = {
+            score_offset = -10,
+          },
+        },
       },
       keymap = {
         preset = "default",
