@@ -1,6 +1,8 @@
 local win = require("lspconfig.ui.windows")
 win.default_options.border = "rounded"
 
+local HOME = os.getenv("HOME")
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -126,6 +128,20 @@ return {
     opts = {
       ui = {
         border = "rounded",
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        ["markdownlint-cli2"] = {
+          args = {
+            "--config",
+            HOME .. "/.markdownlint-cli2.yaml",
+            "--",
+          },
+        },
       },
     },
   },
