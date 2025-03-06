@@ -97,3 +97,5 @@ vim.opt.timeoutlen = vim.g.vscode and 1000 or 400
 
 vim.opt_local.foldmethod = "expr"
 vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.cmd("TSBufDisable highlight")
