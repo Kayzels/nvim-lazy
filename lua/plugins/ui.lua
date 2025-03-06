@@ -146,7 +146,7 @@ return {
       }
 
       opts.sections["lualine_a"] = {
-        { "mode", separator = { left = "" }, right_padding = 2 },
+        { "mode", separator = { left = "" }, right_padding = 2, color = { gui = "bold" } },
       }
 
       -- Set lualine_b to always contain the cwd, and lualine_c to show when root is different from cwd
@@ -401,5 +401,13 @@ return {
         },
       })
     end,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      checkbox = {
+        enabled = true,
+      },
+    },
   },
 }
