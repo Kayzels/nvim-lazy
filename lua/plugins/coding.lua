@@ -206,4 +206,16 @@ return {
       },
     },
   },
+  {
+    "olrtg/nvim-emmet",
+    config = function(_, opts)
+      vim.keymap.set(
+        { "n", "v" },
+        "<leader>cw",
+        require("nvim-emmet").wrap_with_abbreviation,
+        { desc = "Emmet: Wrap with Abbreviation" }
+      )
+    end,
+    ft = "html",
+  },
 }
