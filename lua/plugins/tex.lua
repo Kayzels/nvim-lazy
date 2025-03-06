@@ -4,7 +4,7 @@
 ---@param file_info FileInfo
 ---@return string
 local function GetOutputDir(file_info)
-  local root_patterns = { "Notes", "Exercises", "Assignment", "Assessment", "Exam" }
+  local root_patterns = { "Notes", "Exercises", "Assignment", "Assessment", "Exam", "cv" }
   local result = ""
   for _, pattern in ipairs(root_patterns) do
     if string.find(string.lower(file_info.jobname), string.lower(pattern), 1) ~= nil then
@@ -23,8 +23,8 @@ end
 return {
   {
     "lervag/vimtex",
-    lazy = true,
-    ft = { "tex", "sty" },
+    -- Ensure lazy is false so that inverse search works
+    lazy = false,
     init = function()
       vim.g.vimtex_compiler_latexmk = {
         callback = 1,
@@ -67,8 +67,10 @@ return {
         "descriptimize",
         "descriptenum",
       }
-      vim.g.vimtex_view_method = "sioyek"
-      vim.g.vimtex_view_sioyek_exe = "C:\\Users\\Kyzan\\Tools\\sioyek-release-windows\\sioyek.exe"
+      -- Change to Okular, still supports some Vim keys, but nicer UI
+      vim.g.vimtex_view_general_viewer = "okular"
+      vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
+      vim.g.vimtex_doc_handlers = { "vimtex#doc#handlers#texdoc" }
     end,
   },
 }
