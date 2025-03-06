@@ -40,6 +40,12 @@ if vim.fn.has("wsl") == 1 then
   vim.g.python3_host_prog = "/usr/bin/python3"
 end
 
+if vim.fn.has("linux") then
+  vim.opt.shell = "fish"
+  -- vim.opt.clipboard = "unnamed"
+  vim.opt.clipboard = ""
+end
+
 vim.opt.formatoptions = "jcroqlt"
 
 vim.g.lazyvim_statuscolumn = {
