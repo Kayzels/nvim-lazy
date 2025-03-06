@@ -59,3 +59,7 @@ vim.g.lazygit_config = false
 -- Disable perl and ruby providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+-- Set cursor shapes
+vim.opt.guicursor =
+  "n-v-c-sm:block,i-ci-ve:ver25-blinkon1200-blinkoff1200,r-cr-o:hor20,t:ver25-blinkon500-blinkoff500-TermCursor"
