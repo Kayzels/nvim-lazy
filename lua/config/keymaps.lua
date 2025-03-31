@@ -19,9 +19,11 @@ if vim.fn.has("win32") == 1 then
   vim.keymap.set("n", "<C-Z>", "<Nop>", { desc = "which_key_ignore" })
 end
 
-vim.keymap.del("n", "<leader>ub")
-local wk = require("which-key")
-wk.add({ "<leader>ub", hidden = true })
+if not vim.g.vscode then
+  vim.keymap.del("n", "<leader>ub")
+  local wk = require("which-key")
+  wk.add({ "<leader>ub", hidden = true })
+end
 
 Snacks.toggle({
   name = "Light Mode",

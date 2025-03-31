@@ -53,7 +53,7 @@ local function vsCodeCaller(command)
 end
 
 -- WhichKey
-map({ "x", "n" }, "<Space>", vsCodeCaller("whichkey.show"))
+-- map({ "x", "n" }, "<Space>", vsCodeCaller("whichkey.show"))
 
 -- Folding
 nmap("zM", vsCodeCaller("editor.foldAll"))

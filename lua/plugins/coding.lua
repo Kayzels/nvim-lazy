@@ -43,8 +43,10 @@ local function setMapping(opts)
 end
 
 local function setTextCaseMappings()
-  require("which-key").add({ "ga", group = "Text Case" })
-  require("which-key").add({ "gao", group = "Pending Mode Operator" })
+  if not vim.g.vscode then
+    require("which-key").add({ "ga", group = "Text Case" })
+    require("which-key").add({ "gao", group = "Pending Mode Operator" })
+  end
   ---@type TextCaseMapping[]
   local defs = {
     { key = "u", case = "to_upper_case", lsp = "U", desc = "TO UPPER CASE" },
@@ -125,9 +127,9 @@ return {
     -- Implemented the changes in the function I call in keys.
     "johmsalas/text-case.nvim",
     vscode = true,
-    dependencies = {
-      "folke/which-key.nvim",
-    },
+    -- dependencies = {
+    --   "folke/which-key.nvim",
+    -- },
     config = function(_, opts)
       require("textcase").setup(opts)
     end,
