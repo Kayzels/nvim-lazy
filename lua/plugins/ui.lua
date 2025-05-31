@@ -69,7 +69,9 @@ return {
     enabled = false,
   },
   {
-    "folke/which-key.nvim",
+    -- "folke/which-key.nvim",
+    -- NOTE: Use this PR until merged, fixes winborder issue
+    "iguanacucumber/which-key.nvim",
     opts = {
       preset = "classic",
       win = {
@@ -95,12 +97,16 @@ return {
     },
   },
   {
-    "folke/noice.nvim",
+    -- "folke/noice.nvim",
+    -- NOTE: Using my own repo here to fix double-bordered scrollbar.
+    "Kayzels/noice.nvim",
+    branch = "fix-scrollbar",
     config = function(_, opts)
       -- NOTE: Calling explicitly rather than using LazyVim way,
       -- because LazyVim config clears messages
       require("noice").setup(opts)
     end,
+    ---@type NoiceConfig
     opts = {
       presets = {
         lsp_doc_border = true,

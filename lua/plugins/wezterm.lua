@@ -18,7 +18,7 @@ return {
     opts = {},
   },
   {
-    "folke/which-key.nvim",
+    "which-key.nvim",
     opts = {
       spec = {
         { "<leader>W", group = "Wezterm" },

@@ -1,6 +1,3 @@
-local win = require("lspconfig.ui.windows")
-win.default_options.border = "rounded"
-
 local HOME = os.getenv("HOME")
 
 return {
