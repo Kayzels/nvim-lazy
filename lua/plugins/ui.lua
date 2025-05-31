@@ -376,7 +376,16 @@ return {
   },
   {
     "folke/snacks.nvim",
+    ---@type snacks.Config
     opts = {
+      image = {
+        enabled = true,
+        doc = {
+          enabled = false,
+          float = false,
+          inline = false,
+        },
+      },
       terminal = {
         win = { position = "float", border = "rounded" },
       },
