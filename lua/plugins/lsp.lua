@@ -101,6 +101,9 @@ return {
             },
           },
         },
+        qmlls = {
+          cmd = { "qmlls6" },
+        },
       },
     },
   },
