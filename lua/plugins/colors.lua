@@ -106,7 +106,6 @@ return {
       flavour = "latte",
       transparent_background = false,
       term_colors = false,
-      -- term_colors = true,
       dim_inactive = {
         enabled = false,
         shade = "dark",
@@ -123,7 +122,10 @@ return {
           texCConceptArg = { fg = colors.sky, style = { "bold" } },
           -- texCConceptArg = { fg = colors.maroon, style = { "bold" } },
           texItemLabelConcealed = { link = "texCConceptArg" },
+          BlinkCmpMenuBorder = { bg = colors.none, fg = colors.text },
+          BlinkCmpMenu = { link = "Normal" },
           cmpGhostText = { fg = colors.surface0 },
+          BlinkCmpGhostText = { fg = colors.surface0 },
           texPartArgTitle = { link = "Function" },
           texGroup = { fg = colors.maroon, style = { "bold " } },
           -- MatchParen = { fg = colors.peach, bg = colors.none, style = { "bold" } },
@@ -158,9 +160,14 @@ return {
           enabled = true,
           indentscope_color = "sky",
         },
+        snacks = {
+          enabled = true,
+          -- indent_scope_color = "sky",
+        },
         which_key = false,
         render_markdown = false,
         fzf = true,
+        blink_cmp = true,
       },
     },
   },
@@ -174,7 +181,7 @@ return {
   },
   {
     "f-person/auto-dark-mode.nvim",
-    enabled = vim.fn.has("win32") == 1,
+    -- enabled = vim.fn.has("win32") == 1,
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
