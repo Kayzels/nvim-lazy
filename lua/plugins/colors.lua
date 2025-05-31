@@ -5,8 +5,7 @@ return {
     priority = 1000,
     opts = {
       style = "moon",
-      -- opts.transparent = false
-      transparent = true,
+      transparent = not vim.g.neovide,
       terminal_colors = false,
       styles = {
         comments = { italic = true },
@@ -105,7 +104,7 @@ return {
     priority = 1000,
     opts = {
       flavour = "latte",
-      transparent_background = true,
+      transparent_background = false,
       term_colors = false,
       -- term_colors = true,
       dim_inactive = {
