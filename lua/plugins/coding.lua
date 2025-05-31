@@ -220,4 +220,8 @@ return {
     end,
     ft = "html",
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "css" } },
+  },
 }
