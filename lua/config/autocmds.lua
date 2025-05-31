@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
 })
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
   pattern = "*",
-  command = "set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20",
+  command = "set guicursor=n-v-c-sm:block-blinkon0,i-ci-ve:ver25,r-cr-o:hor20",
 })
 
 -- Disable minipairs completing `` in some files
