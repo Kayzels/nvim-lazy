@@ -57,36 +57,6 @@ Snacks.toggle({
   end,
 }):map("<leader>uv")
 
-Snacks.toggle({
-  name = "Codeium Completion",
-  get = function()
-    local status, _ = require("neocodeium").get_status()
-    return status == 0
-  end,
-  set = function(_)
-    require("neocodeium.commands").toggle()
-  end,
-}):map("<leader>ua")
-
-Snacks.toggle({
-  name = "Codeium Server",
-  get = function()
-    local _, server_status = require("neocodeium").get_status()
-    return server_status == 0
-  end,
-  set = function(state)
-    local _, server_status = require("neocodeium").get_status()
-    if state then
-      if server_status == 2 then
-        require("neocodeium.commands").restart()
-        require("neocodeium.commands").enable()
-      end
-    else
-      require("neocodeium.commands").disable(true)
-    end
-  end,
-}):map("<leader>uA")
-
 -- Yank line on `dd` only if not empty
 vim.keymap.set("n", "dd", function()
   if vim.fn.getline("."):match("^%s*$") then
