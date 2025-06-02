@@ -47,14 +47,36 @@ return {
       strategies = {
         chat = {
           adapter = "gemini",
+          roles = {
+            ---@type string|fun(adapter: CodeCompanion.Adapter): string
+            llm = function(adapter)
+              local icon = "󰚩  "
+              local name = "CodeCompanion"
+              local bracket_name = adapter.formatted_name
+              if adapter.name == "ollama" then
+                name = "WriteCompanion"
+                if adapter.model and adapter.model.name then
+                  bracket_name = adapter.model.name
+                end
+              end
+              return icon .. name .. " (" .. bracket_name .. ")"
+            end,
+            ---@type string
+            user = (function()
+              local name = vim.env.USER or "Me"
+              return "  " .. name:sub(1, 1) .. name:sub(2)
+            end)(),
+          },
         },
       },
       opts = {
-        system_prompt = function(args)
-          local language = args.language or "English"
+        ---@param opts {adapter: CodeCompanion.Adapter, language?: string}
+        ---@return string
+        system_prompt = function(opts)
+          local language = opts.language or "English"
           local prompts = require("prompts")
           local result = prompts.default_prompt
-          if args.adapter and args.adapter.name == "ollama" then
+          if opts.adapter.name == "ollama" then
             result = prompts.writing_prompt
           end
           return string.format(result, language)
@@ -80,6 +102,10 @@ return {
         filetype = {
           codecompanion = {
             render_modes = { "n", "c", "v" },
+            heading = {
+              -- Remove the circle showing for H2, that's the user and bot heading
+              icons = { "󰲡 ", " ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+            },
           },
         },
       },

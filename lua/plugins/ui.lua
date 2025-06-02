@@ -151,8 +151,22 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
+      code = {
+        sign = true,
+      },
+      heading = {
+        sign = true,
+        position = "inline",
+        icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+        checkbox = {
+          enabled = true,
+        },
+      },
       checkbox = {
         enabled = true,
+      },
+      pipe_table = {
+        preset = "round",
       },
     },
     --- Even if other config is elsewhere, ft *has* to be set here for it to work
